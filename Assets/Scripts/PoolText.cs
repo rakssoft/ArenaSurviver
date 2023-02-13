@@ -4,35 +4,26 @@ using UnityEngine;
 
 public class PoolText : MonoBehaviour
 {
-    [SerializeField] TextDamage[] _textsDamageArr;
+    [SerializeField] private List<TextDamage> _textDamageNotActiveList;
+    private List<TextDamage> _textDamageIsActiveList = new List<TextDamage>();
+
     private void OnEnable()
     {
         EventManager.TakeDamage += ShowDamage;
     }
 
-    private void ShowDamage(Vector3 pos, string damage)
+    private void OnDisable()
     {
-        
-        for (int i = 0; i < _textsDamageArr.Length; i++)
-        {
-            _textsDamageArr[i].gameObject.SetActive(true);
-            
-            if (_textsDamageArr[i].isActive == false)
-            {
-                _textsDamageArr[i].Start();
-                _textsDamageArr[i].isActive = true;
-                _textsDamageArr[i].gameObject.transform.position = pos;
-                _textsDamageArr[i].Damagetext = damage;
-                break;
-            }
-            else
-            {
-                _textsDamageArr[i].gameObject.SetActive(false);
-            }
-        }
-
-
-      
+        EventManager.TakeDamage -= ShowDamage;
     }
 
+    private void ShowDamage(Vector3 pos, string damage)
+    {
+        _textDamageNotActiveList[0].gameObject.SetActive(true);
+        _textDamageNotActiveList[0].ShowText(pos, damage);
+        _textDamageIsActiveList.Add(_textDamageNotActiveList[0]);
+        _textDamageNotActiveList.RemoveAt(0);
+    }
 }
+
+

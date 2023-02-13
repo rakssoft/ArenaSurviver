@@ -8,14 +8,15 @@ public class TextDamage : MonoBehaviour
     private Color _textColor;
 
     public TMP_Text TextMesh;
-    public string Damagetext;
     public bool isActive;
 
-    public void Start()
+    public void ShowText(Vector3 pos, string damageText )
     {
-        TextMesh.text = Damagetext.ToString();
+        gameObject.transform.position = pos;
+        TextMesh.text = damageText.ToString();
         _textColor = TextMesh.color;
         _disappearedTimer = 1;
+        isActive = true;
     }
     private void Update()
     {
