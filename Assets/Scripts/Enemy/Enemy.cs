@@ -49,7 +49,10 @@ public class Enemy : MonoBehaviour
         if(_health <= 0)
         {
             EventManager.TakeDamage?.Invoke(gameObject.transform.position, damage.ToString());
-            gameObject.SetActive(false);
+            EventManager.CurrentCountEnemy?.Invoke(-1);
+            EventManager.ExperienceDropEnemy?.Invoke(1);
+            Destroy(gameObject);
+          
         }
     }
 }

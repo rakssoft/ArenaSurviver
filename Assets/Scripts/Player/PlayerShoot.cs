@@ -6,6 +6,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private GameObject _spawnFire;
     [SerializeField] private float _radiusSphere;
     [SerializeField] private GameObject _bullet;
+    [SerializeField] private GameObject _target;
     [SerializeField] private Transform _parentBullets;
     [SerializeField] private Bullet[] _poolBullets;
     [SerializeField] private float _damageBullets;
@@ -38,14 +39,14 @@ public class PlayerShoot : MonoBehaviour
     /// </summary>
     private void NearestEnemy()
     {
-        float shortestDistance = Mathf.Infinity;                                          // кратчайшее растояние
-        GameObject nearestEnemy = null;                                                  // ближайший ноль    
+        float shortestDistance = Mathf.Infinity;                                          
+        GameObject nearestEnemy = null;                                                    
         Collider[] colliders = Physics.OverlapSphere(transform.position, _radiusSphere);
         foreach (Collider nearbyObject in colliders)
         {
             if (nearbyObject.TryGetComponent(out Enemy enemy))
             {
-                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);         // поверяет всех на ближайшее растояние
+                float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);       
                 if (distanceToEnemy < shortestDistance)
                 {
                     shortestDistance = distanceToEnemy;
@@ -55,7 +56,7 @@ public class PlayerShoot : MonoBehaviour
         }
         if (nearestEnemy)
         {
-            Shoot(nearestEnemy.transform.position);
+            Shoot(nearestEnemy);
         }
     }
 
@@ -64,27 +65,24 @@ public class PlayerShoot : MonoBehaviour
     /// стрельба вытаскивание пули из пула
     /// </summary>
     /// <param name="enemy"></param>
-    private void Shoot(Vector3 enemy)
+    private void Shoot(GameObject enemy)
     {  
         if (currentIndexBulletInPool == 0)
         {
             currentIndexBulletInPool = _poolBullets.Length;
         }
         currentIndexBulletInPool--;
-        gameObject.transform.LookAt(enemy);
-       
-        _poolBullets[currentIndexBulletInPool].gameObject.transform.position = _spawnFire.transform.position;
-        _poolBullets[currentIndexBulletInPool].gameObject.transform.rotation = _spawnFire.transform.rotation;
-        _poolBullets[currentIndexBulletInPool].gameObject.SetActive(true);
-        _poolBullets[currentIndexBulletInPool].DamageBullet = _damageBullets;
-        _poolBullets[currentIndexBulletInPool].BulletPenetrationAbility = _bulletPenetration;
-        _poolBullets[currentIndexBulletInPool].StartBullet();
+        gameObject.transform.LookAt(enemy.transform.position);
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 
+        GameObject bull = Instantiate(_bullet, _spawnFire.transform.position, Quaternion.identity);
+        bull.transform.rotation = _spawnFire.transform.rotation;
+        bull.GetComponent<Bullet>().StartBullet(_bulletPenetration, _damageBullets, _spawnFire.transform.position, 50);
 
-        //    GameObject bullet = Instantiate(_bullet, _spawnFire.transform.position, Quaternion.identity, _parentBullets);
-        //  bullet = _spawnFire.transform.rotation;
-        //     soundManger._fireTower.Play();
-        //   Instantiate(vfx_prefabBullet, spawnBulet.transform.position, spawnBulet.rotation);
+        ///  сделать реализацию пула для пуль.  Разобраться почему у них меняется направление,  доставать с дефолтным состоянием.
+        /*     _poolBullets[currentIndexBulletInPool].gameObject.SetActive(true);
+             _poolBullets[currentIndexBulletInPool].gameObject.transform.rotation = _spawnFire.transform.rotation;
+             _poolBullets[currentIndexBulletInPool].StartBullet(_bulletPenetration, _damageBullets, _spawnFire.transform.position, 50);*/
 
     }
 
