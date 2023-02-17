@@ -24,7 +24,8 @@ public class Bullet : MonoBehaviour
         _timer += Time.deltaTime;
         if(_timer >= _timerForFalse)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+          //  gameObject.SetActive(false);
         }
     }
 
@@ -36,7 +37,8 @@ public class Bullet : MonoBehaviour
             _bulletPenetrationAbility--;
             if(_bulletPenetrationAbility <= 0)
             {
-                gameObject.SetActive(false);
+                Destroy(gameObject);
+              //  gameObject.SetActive(false);
             }
 
         }
