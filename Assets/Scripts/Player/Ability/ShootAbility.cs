@@ -15,6 +15,7 @@ public class ShootAbility : Ability
         Collider[] colliders = Physics.OverlapSphere(parent.transform.position, _radiusSphere);
         foreach (Collider nearbyObject in colliders)
         {
+           
             if (nearbyObject.TryGetComponent(out Enemy enemy))
             {
                 float distanceToEnemy = Vector3.Distance(parent.transform.position, enemy.transform.position);
