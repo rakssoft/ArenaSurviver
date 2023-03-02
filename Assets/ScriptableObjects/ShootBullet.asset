@@ -10,13 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74022ded349c3bf44adc89e381502058, type: 3}
-  m_Name: Shoot
+  m_Name: ShootBullet
   m_EditorClassIdentifier: 
-  Name: Shoot
-  CooldownTime: 2
-  ActiveTime: 0.1
-  LevelAbility: 1
+  AbilityName: 
+  Icon: {fileID: 21300000, guid: 448d600b6b959074d94c8933775142fc, type: 3}
+  Sound: {fileID: 0}
+  Cooldown: 1
+  Duration: 0.1
+  Level: 1
+  state: 2
+  activeTime: -0.00044087647
+  cooldownTime: 0.85123104
   _radiusSphere: 15
-  _bullet: {fileID: 2502360562810321727, guid: c40bc701221d1664a971f7dbce950414, type: 3}
-  _damageBullets: 30
-  _bulletPenetration: 2
+  _bulletPrefab: {fileID: 2502360562810321727, guid: c40bc701221d1664a971f7dbce950414, type: 3}
+  _baseDamage: 10
+  _basePenetration: 1
+  _currentLevel: 1

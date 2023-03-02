@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,14 +6,15 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
 
-    public GameObject target;
+    [SerializeField] private  List<Item> itemsDrop;
     private NavMeshAgent agent;
     private Animator animator;
     private AudioSource shootGun;
     private float timer;
     private float _health = 1;
+    private GameObject target;
 
-   private void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -48,9 +50,11 @@ public class Enemy : MonoBehaviour
         _health -= damage;
         if(_health <= 0)
         {
+            int random = Random.Range(0, itemsDrop.Count);            
             EventManager.TakeDamage?.Invoke(gameObject.transform.position, damage.ToString());
             EventManager.CurrentCountEnemy?.Invoke(-1);
-            EventManager.ExperienceDropEnemy?.Invoke(1);
+            itemsDrop[random].Activate(gameObject);
+
             Destroy(gameObject);
           
         }

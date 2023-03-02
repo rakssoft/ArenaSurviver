@@ -5,30 +5,36 @@ using UnityEngine;
 public class PoolText : MonoBehaviour
 {
     [SerializeField] private List<TextDamage> _textDamageNotActiveList;
+    private Queue<TextDamage> _textDamageQueue = new Queue<TextDamage>();
 
-    private void OnEnable()
+    private void Awake()
     {
         EventManager.TakeDamage += ShowDamage;
-        EventManager.TakeDamageIsOff += AddListTextDamageNotActive;
+        EventManager.TakeDamageIsOff += AddTextDamageToQueue;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         EventManager.TakeDamage -= ShowDamage;
-        EventManager.TakeDamageIsOff -= AddListTextDamageNotActive;
+        EventManager.TakeDamageIsOff -= AddTextDamageToQueue;
     }
 
     private void ShowDamage(Vector3 pos, string damage)
     {
-        _textDamageNotActiveList[0].gameObject.SetActive(true);
-        _textDamageNotActiveList[0].ShowText(pos, damage);
-        _textDamageNotActiveList.RemoveAt(0);
+        if (_textDamageQueue.Count > 0)
+        {
+            TextDamage textDamage = _textDamageQueue.Dequeue();
+            textDamage.gameObject.SetActive(true);
+            textDamage.ShowText(pos, damage);
+            _textDamageNotActiveList.Add(textDamage);
+        }
     }
 
-    private void AddListTextDamageNotActive(GameObject gameObject)
+    private void AddTextDamageToQueue(GameObject gameObject)
     {
-        _textDamageNotActiveList.Add(gameObject.GetComponent<TextDamage>());
+        TextDamage textDamage = gameObject.GetComponent<TextDamage>();
+        textDamage.gameObject.SetActive(false);
+        _textDamageQueue.Enqueue(textDamage);
+        _textDamageNotActiveList.Remove(textDamage);
     }
 }
-
-

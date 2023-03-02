@@ -4,13 +4,13 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private float _damage;
-    [SerializeField] private float _rateTime;
+    [SerializeField] private float _rateOfFire;
     private  float _timer;
 
 
     private void Start()
     {
-        _timer = _rateTime;
+        _timer = _rateOfFire;
     }
     private void OnTriggerStay(Collider other)
     {
@@ -19,8 +19,7 @@ public class EnemyAttack : MonoBehaviour
             _timer -= Time.deltaTime;
             if(_timer <= 0)
             {
-                print("uron");
-                _timer = _rateTime;
+                _timer = _rateOfFire;
                 _player.TakeDamage(_damage);
             }
         }

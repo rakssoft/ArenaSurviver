@@ -22,13 +22,11 @@ public class PlayerStats : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.ExperienceDropEnemy += TakeExperience;
         EventManager.TakeDamagePlayer += TakeDamage;
     }
 
     private void OnDisable()
     {
-        EventManager.ExperienceDropEnemy -= TakeExperience;
         EventManager.TakeDamagePlayer += TakeDamage;
     }
     private void Start()

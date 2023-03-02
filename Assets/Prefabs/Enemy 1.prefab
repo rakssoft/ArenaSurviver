@@ -112,7 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3677de53a1e86347b85e481d8965c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  itemsDrop:
+  - {fileID: 11400000, guid: 76ee0a956127abe4aa48211a31aaf205, type: 2}
 --- !u!195 &7638853925896209400
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -148,4 +149,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: -35
-  _rateTime: 4
+  _rateOfFire: 0.4

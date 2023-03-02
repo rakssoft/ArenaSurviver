@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 773e44eff928a804e8f0aab3f6f6dda1, type: 3}
+  m_Name: FireBall
+  m_EditorClassIdentifier: 
+  AbilityName: 
+  Icon: {fileID: 21300000, guid: 9f69b220176e6964fbd87f5f158d45e3, type: 3}
+  Sound: {fileID: 0}
+  Cooldown: 5
+  Duration: 5
+  Level: 0
+  state: 2
+  activeTime: -0.0012801148
+  cooldownTime: 2.3448913
+  baseDamage: 20
+  basePenetrationAbility: 1
+  _currentLevelAbility: 0
+  currentRotationSpeed: 360
+  currentRotationDistance: 5
+  fireballPrefab: {fileID: 2582405692084614984, guid: 5740a3a0bfa9c12419e68ff0aea2c8a0, type: 3}

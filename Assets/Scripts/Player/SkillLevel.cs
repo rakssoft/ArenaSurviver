@@ -3,42 +3,38 @@ using UnityEngine;
 
 public class SkillLevel : MonoBehaviour
 {
-    [SerializeField] private Text _levelText;
+    [SerializeField]  private Text _levelText;
     [SerializeField] private Image _imageSkill;
-    private int _level;
+    [SerializeField] Ability _ability;
+    [SerializeField] private int _level;
 
-
-    private void Start()
+    private void OnEnable()
     {
-        _level = 0;
-        ShowSkill();
+        EventManager.AbilityLevelUPUiFooterPanel += LevelUpShow;
     }
-    private void ShowSkill()
-    {
-        if(_level == 0)
-        {
-            _levelText.text = "";
-            Color newColor = _imageSkill.color;
-            newColor.a = 0.5f;
-            _imageSkill.color = newColor;
 
-        }
-        else if(_level > 0)
+    private void OnDisable()
+    {
+
+        EventManager.AbilityLevelUPUiFooterPanel -= LevelUpShow;
+    }
+    public void ShowSkill(Ability ability)
+    {
+        _ability = ability;
+        _level = _ability.Level;
+        _imageSkill.sprite = _ability.Icon;
+        _levelText.text = _level.ToString();
+
+    }
+
+    public void LevelUpShow(Ability ability)
+    {
+        if(_ability == ability)
         {
+            _level++;
             _levelText.text = _level.ToString();
-            Color newColor = _imageSkill.color;
-            newColor.a = 1f;
-            _imageSkill.color = newColor;
         }
+        
     }
-
-    public void LevelUP(int level)
-    {
-        _level += level;
-        ShowSkill();
-    }
-
-
-
 
 }
