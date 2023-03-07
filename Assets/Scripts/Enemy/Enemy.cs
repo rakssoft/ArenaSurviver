@@ -2,11 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
 public class Enemy : MonoBehaviour
 {
 
-    [SerializeField] private  List<Item> itemsDrop;
+    [SerializeField] private List<Item> itemsDrop;
     private NavMeshAgent agent;
     private Animator animator;
     private AudioSource shootGun;
@@ -28,7 +27,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if(timer >= 1.5)
+        if (timer >= 1.5)
         {
             timer = 0;
             if (target)
@@ -42,22 +41,35 @@ public class Enemy : MonoBehaviour
     {
         transform.LookAt(target.transform.position);
         agent.SetDestination(target.transform.position);
-
     }
 
     public void TakeDamage(float damage)
     {
         _health -= damage;
-        if(_health <= 0)
+        if (_health <= 0)
         {
-            int random = Random.Range(0, itemsDrop.Count);            
+            float totalWeight = 0;
+            foreach (var item in itemsDrop)
+            {
+                totalWeight += item.Weight;
+            }
+
+            float randomWeight = Random.Range(0f, totalWeight);
+
+            for (int i = 0; i < itemsDrop.Count; i++)
+            {
+                randomWeight -= itemsDrop[i].Weight;
+                if (randomWeight <= 0)
+                {
+                    itemsDrop[i].Activate(gameObject);
+                    break;
+                }
+            }
+
             EventManager.TakeDamage?.Invoke(gameObject.transform.position, damage.ToString());
             EventManager.CurrentCountEnemy?.Invoke(-1);
-            itemsDrop[random].Activate(gameObject);
 
             Destroy(gameObject);
-          
         }
     }
 }
-

@@ -114,6 +114,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsDrop:
   - {fileID: 11400000, guid: 76ee0a956127abe4aa48211a31aaf205, type: 2}
+  - {fileID: 11400000, guid: 3d6017be3c85c9e4f81cfab5dba6b419, type: 2}
+  - {fileID: 11400000, guid: 9878c331647b8824bb54d6b04666cc0e, type: 2}
+  - {fileID: 11400000, guid: 1ed809add11c7814a9953d118cac5b04, type: 2}
+  - {fileID: 11400000, guid: 2ccd1753ae571ef4ea417d03b096d0d5, type: 2}
 --- !u!195 &7638853925896209400
 NavMeshAgent:
   m_ObjectHideFlags: 0

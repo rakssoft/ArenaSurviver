@@ -15,5 +15,6 @@ MonoBehaviour:
   ItemName: ExpaItem
   Icon: {fileID: 21300000, guid: 0e0bedb917191584aa27b1e2134fecab, type: 3}
   Sound: {fileID: 0}
-  _expaPrefab: {fileID: 1943580050989719246, guid: 61325c7435ba0a3439bb18f310e6a6d1, type: 3}
+  Weight: 80
+  _expaPrefab: {fileID: 7584633282055058447, guid: 761e03bcfade8d544afd0095e0c35c38, type: 3}
   _amountExperience: 1

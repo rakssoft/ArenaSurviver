@@ -10,20 +10,21 @@ public class ExpaItem : Item
     {
         GameObject _expaGameobject = Instantiate(_expaPrefab, parent.transform.position, parent.transform.rotation);
         ItemCollisionHandler collisionHandler = _expaGameobject.AddComponent<ItemCollisionHandler>();
-        collisionHandler._amountExperience = _amountExperience;
+        collisionHandler.ValueCollision = _amountExperience;
     }
 }
 public class ItemCollisionHandler : MonoBehaviour
 {
-    public int _amountExperience;
+    public float ValueCollision;
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerStats playerStats))
+        if (other.TryGetComponent(out Pl playerStats))
         {
-            playerStats.TakeExperience(_amountExperience);
+            playerStats.TakeExperience(ValueCollision);
             Destroy(gameObject);
         }
     }
 }
+

@@ -50,14 +50,21 @@ public class ShootAbility : Ability
         _currentDamage = _baseDamage + (_currentLevel * 10);
         _currentPenetration = _basePenetration + _currentLevel;
     }
+
+
     private void Shoot(GameObject enemy, GameObject parent)
     {
-        parent.transform.LookAt(enemy.transform.position);
-        parent.transform.eulerAngles = new Vector3(0, parent.transform.eulerAngles.y, 0);
+        Quaternion parentRotation = parent.transform.rotation; // сохраняем текущий поворот
+        parent.transform.LookAt(enemy.transform.position); // поворачиваем родительский объект в сторону Enemy
+        parent.transform.eulerAngles = new Vector3(0, parent.transform.eulerAngles.y, 0); // сбрасываем поворот по оси x и z
 
         GameObject bull = Instantiate(_bulletPrefab, parent.transform.position, Quaternion.identity);
-        bull.transform.rotation = parent.transform.rotation;
-        bull.GetComponent<Bullet>().StartBullet(_currentPenetration, _currentDamage, parent.transform.position, 50);
+        bull.transform.rotation = parent.transform.rotation; // устанавливаем поворот для пули
 
+        // восстанавливаем сохраненный поворот для родительского объекта
+        parent.transform.rotation = parentRotation;
+
+        bull.GetComponent<Bullet>().StartBullet(_currentPenetration, _currentDamage, parent.transform.position, 50);
     }
+
 }

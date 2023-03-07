@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa23919fc8664b45b29ea4d2dbc20a8, type: 3}
+  m_Name: DestroyerItem
+  m_EditorClassIdentifier: 
+  ItemName: DestroyerItem
+  Icon: {fileID: 0}
+  Sound: {fileID: 0}
+  Weight: 2
+  _destroyerPrefab: {fileID: 4055222917071935375, guid: 763f92ec24401b1498694e164ed2486d, type: 3}
+  _radiusDestroy: 25
+  _damage: 999

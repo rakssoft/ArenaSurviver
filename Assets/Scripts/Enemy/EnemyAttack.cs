@@ -14,7 +14,7 @@ public class EnemyAttack : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent<PlayerStats>(out PlayerStats _player))
+        if (other.TryGetComponent<PlayerCharacteristics>(out PlayerCharacteristics _player))
         {
             _timer -= Time.deltaTime;
             if(_timer <= 0)

@@ -15,7 +15,8 @@ public class RestorinHealthAbility : Ability
             _currentRestoringHealth = _baseRestoringHealth;
         }
 
-        Debug.Log(_currentRestoringHealth);
+        float RestoreHealth = _currentRestoringHealth;
+        EventManager.TakeDamagePlayer?.Invoke(RestoreHealth);
     }
 
     public override void LevelUp()
