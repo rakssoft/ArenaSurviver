@@ -9,8 +9,18 @@ public class AbilitySystem : MonoBehaviour
     {
         foreach (var ability in abilities)
         {
-            EventManager.AbilityAddUiFooterPanel?.Invoke(ability);
+            EventManager.AddAbilityInUiFooterPanel?.Invoke(ability);
         }
+    }
+
+    private void OnEnable()
+    {
+        EventManager.AddAbility += AddAbility;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.AddAbility -= AddAbility;
     }
 
     private void Update()
@@ -56,13 +66,9 @@ public class AbilitySystem : MonoBehaviour
         if (!abilities.Contains(ability))
         {
             abilities.Add(ability);
-            EventManager.AbilityAddUiFooterPanel?.Invoke(ability);
+            EventManager.AddAbilityInUiFooterPanel?.Invoke(ability);
         }
     }
 
-    public void LevelUpAbility(Ability ability)
-    {
-        ability.LevelUp(); 
-        EventManager.AbilityLevelUPUiFooterPanel?.Invoke(ability);
-    }
+
 }

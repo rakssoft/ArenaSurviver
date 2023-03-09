@@ -54,14 +54,14 @@ public class ShootAbility : Ability
 
     private void Shoot(GameObject enemy, GameObject parent)
     {
-        Quaternion parentRotation = parent.transform.rotation; // сохраняем текущий поворот
-        parent.transform.LookAt(enemy.transform.position); // поворачиваем родительский объект в сторону Enemy
-        parent.transform.eulerAngles = new Vector3(0, parent.transform.eulerAngles.y, 0); // сбрасываем поворот по оси x и z
+        Quaternion parentRotation = parent.transform.rotation; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        parent.transform.LookAt(enemy.transform.position); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Enemy
+        parent.transform.eulerAngles = new Vector3(0, parent.transform.eulerAngles.y, 0); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ x пїЅ z
 
         GameObject bull = Instantiate(_bulletPrefab, parent.transform.position, Quaternion.identity);
-        bull.transform.rotation = parent.transform.rotation; // устанавливаем поворот для пули
+        bull.transform.rotation = parent.transform.rotation; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
-        // восстанавливаем сохраненный поворот для родительского объекта
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         parent.transform.rotation = parentRotation;
 
         bull.GetComponent<Bullet>().StartBullet(_currentPenetration, _currentDamage, parent.transform.position, 50);

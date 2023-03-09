@@ -1,29 +1,36 @@
 using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
+using Cinemachine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField] private PlayerController _player;
+    [SerializeField] private GameObject _spawnPlayer;
+    [SerializeField] private Transform _parentPlayer;
     [SerializeField] private GameObject _skillPanel;
     [SerializeField] private SkillLevel _skillUiPrefab;
     [SerializeField] private Transform _parentFooter;
     [SerializeField] private List<SkillLevel> _listSkillLevels = new List<SkillLevel>();
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
 
     private void OnEnable()
     {
         EventManager.LevelUp += IsLevelUp;
-        EventManager.AbilityAddUiFooterPanel += ShowAbilityFooterPanel;
+        EventManager.AddAbilityInUiFooterPanel += ShowAbilityFooterPanel;
     }
 
     private void OnDisable()
     {
         EventManager.LevelUp -= IsLevelUp;
-        EventManager.AbilityAddUiFooterPanel -= ShowAbilityFooterPanel;
+        EventManager.AddAbilityInUiFooterPanel -= ShowAbilityFooterPanel;
     }
     private void Start()
     {
         Time.timeScale = 1;
         _skillPanel.SetActive(false);
+        PlayerController player = Instantiate(_player, _spawnPlayer.transform.position, Quaternion.identity, _parentPlayer);
+        virtualCamera.Follow = player.transform;
     }
 
     private void IsLevelUp(bool isLevelUp)
@@ -39,6 +46,13 @@ public class PlayerManager : MonoBehaviour
     {
         Time.timeScale = 1;
         _skillPanel.SetActive(false);
+    }
+ 
+    public void ChooseAbility(Ability ability)
+    {
+        EventManager.AddAbility?.Invoke(ability);
+        ability.LevelUp();
+        EventManager.AbilityLevelUPUiFooterPanel?.Invoke(ability);
     }
 
     public void ShowAbilityFooterPanel(Ability ability)

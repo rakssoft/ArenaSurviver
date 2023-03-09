@@ -10,8 +10,9 @@ public static class EventManager
     public static UnityAction<float> TakeDamagePlayer;
     public static UnityAction<int> HealtAbilityLevelUp;
     public static UnityAction<int> FireballAbilityLevelUp;
-    public static UnityAction<Ability> AbilityAddUiFooterPanel;
+    public static UnityAction<Ability> AddAbilityInUiFooterPanel;
     public static UnityAction<Ability> AbilityLevelUPUiFooterPanel;
+    public static UnityAction<Ability> AddAbility;
     public static UnityAction<int> IndexAudioClipPlay;
     public static UnityAction<bool> BatttleIsWon;
 

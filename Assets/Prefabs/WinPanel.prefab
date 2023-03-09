@@ -904,8 +904,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -4826153811942734971}
-        m_TargetAssemblyTypeName: EndGamePanel, Assembly-CSharp
-        m_MethodName: ExitMenu
+        m_TargetAssemblyTypeName: EndPanel, Assembly-CSharp
+        m_MethodName: LoadMainScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1079,8 +1079,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8187376666208088739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaa77f8be1d52ee47bb016b3f23d4e26, type: 3}
+  m_Script: {fileID: 11500000, guid: e9c800650ae123e4f82951bef15d2f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinsText: {fileID: 1431896417200528268}
-  _gemText: {fileID: 1267911705150267341}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(PlayerController), typeof(PlayerCharacteristics))]
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;

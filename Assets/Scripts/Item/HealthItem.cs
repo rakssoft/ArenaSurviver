@@ -21,9 +21,9 @@ public class ItemCollisionHeath : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerStats playerStats))
+        if (other.TryGetComponent(out PlayerCharacteristics player))
         {
-            playerStats.TakeDamage(ValueCollision);
+            player.TakeDamage(ValueCollision);
             Destroy(gameObject);
         }
     }
