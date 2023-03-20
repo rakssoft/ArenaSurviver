@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb711e22d123e9c4bab1acd025282ef1, type: 3}
+  m_Name: ShockWave
+  m_EditorClassIdentifier: 
+  AbilityName: 
+  Icon: {fileID: 21300000, guid: e32aad571b880e549a22b1cc2f2f84a2, type: 3}
+  Sound: {fileID: 0}
+  Cooldown: 5
+  Duration: 5
+  Level: 0
+  state: 1
+  activeTime: 3.4099836
+  cooldownTime: -0.03469703
+  _baseDamage: 10
+  _shockWavePrefab: {fileID: 5738667364211373684, guid: 9074cfacc66aafb42b13c80c51fc1447, type: 3}

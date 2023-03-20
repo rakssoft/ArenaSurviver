@@ -6,12 +6,25 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _characterPrefab;
-
+     [SerializeField] private GameObject[]  _listPanels;
+    [SerializeField] private int _indexStartPanel;
 
     private void Start()
     {
-        _characterPrefab.SetActive(true);
-        
+        for (int i = 0; i < _listPanels.Length; i++)
+        {
+            _listPanels[i].SetActive(false);
+        }
+        _listPanels[_indexStartPanel].SetActive(true);
+    }
+
+    public void OnPanel(int indexPanel)
+    {
+        for (int i = 0; i < _listPanels.Length; i++)
+        {
+            _listPanels[i].SetActive(false);
+        }
+        _listPanels[indexPanel].SetActive(true);
     }
 
 

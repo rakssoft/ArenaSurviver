@@ -16,10 +16,11 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 2e350bcef09f70943ba03de78d8c063a, type: 3}
   Sound: {fileID: 0}
   Cooldown: 5
-  Duration: 1
+  Duration: 5
   Level: 0
   state: 1
-  activeTime: 0.5044176
-  cooldownTime: -0.001441235
+  activeTime: 0.66254526
+  cooldownTime: -0.0035165139
   _baseRestoringHealth: 1
   _currentRestoringHealth: 0
+  _restoringHealth: {fileID: 6123496984629303113, guid: b1d8bb88830757841a64fd27dbfd598c, type: 3}

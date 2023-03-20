@@ -59,11 +59,8 @@ public class PlayerCharacteristics: MonoBehaviour
     {
         _speed = newSpeed;
     }
-
-
     public void TakeDamage(float damage)
-    {
-    
+    {    
         _currentHealt += damage;
         ShowInfo();
         if (_currentHealt <= 0)
@@ -91,6 +88,12 @@ public class PlayerCharacteristics: MonoBehaviour
         ShowInfo();
     }
 
+    public void IncreaseMaxHealth(int health)
+    {
+        _maxHealth += health;
+    }
 
-    
+
+
+
 }

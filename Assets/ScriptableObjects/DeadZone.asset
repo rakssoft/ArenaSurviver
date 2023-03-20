@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed3f655e2ef0794ca98f0830d66f445, type: 3}
+  m_Name: DeadZone
+  m_EditorClassIdentifier: 
+  AbilityName: 
+  Icon: {fileID: 21300000, guid: 2531e15fe967a354d9d28c9cfc1d71ca, type: 3}
+  Sound: {fileID: 0}
+  Cooldown: 10
+  Duration: 5
+  Level: 0
+  state: 2
+  activeTime: -0.004394576
+  cooldownTime: 0.527564
+  _baseDamage: 5
+  _currentDamage: 5
+  _prefabGamezone: {fileID: 3898410203919652343, guid: c42f5df7e5a66094db3454b82f6b16f8, type: 3}
+  _currenttimerActive: 0
