@@ -468,11 +468,12 @@ GameObject:
   - component: {fileID: 597221464054765121}
   - component: {fileID: 597221464054765124}
   - component: {fileID: 597221464054765127}
-  - component: {fileID: 597221464054765126}
+  - component: {fileID: 597221464054765129}
   - component: {fileID: 597221464054765125}
   - component: {fileID: 597221464054765128}
   - component: {fileID: 597221464054765131}
-  - component: {fileID: 597221464054765129}
+  - component: {fileID: 1702607235889293918}
+  - component: {fileID: 7343496847334505478}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -523,8 +524,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerController: {fileID: 597221464054765124}
   _animator: {fileID: 597221464054765125}
-  _playerCharacteristics: {fileID: 597221464054765126}
---- !u!114 &597221464054765126
+  _playerCharacteristics: {fileID: 11400000, guid: 27bf7a3a881069e41918a61be823d2a5, type: 2}
+  _rotationSpeed: 10
+--- !u!114 &597221464054765129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -533,16 +535,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 597221464054765120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee3f85956a62f384fb4817391ec083ee, type: 3}
+  m_Script: {fileID: 11500000, guid: d03819028f79ef2458651f9148d508c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _valueExperience: {fileID: 597221463103904452}
-  _valueHealth: {fileID: 597221464084603319}
-  _levelText: {fileID: 597221462616753959}
-  _maxHealth: 100
-  _speed: 8
-  SpeedRotations: 9
-  FireRate: 2
+  abilities:
+  - {fileID: 11400000, guid: ca8324d0f4aec0e44ae16aa67189b7b7, type: 2}
 --- !u!95 &597221464054765125
 Animator:
   serializedVersion: 4
@@ -592,7 +589,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &597221464054765129
+--- !u!114 &1702607235889293918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -601,11 +598,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 597221464054765120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d03819028f79ef2458651f9148d508c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 63be6a505a2717f42b13f08efe7f7f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities:
-  - {fileID: 11400000, guid: ca8324d0f4aec0e44ae16aa67189b7b7, type: 2}
+  _playerCharacteristics: {fileID: 11400000, guid: 27bf7a3a881069e41918a61be823d2a5, type: 2}
+  _valueHealth: {fileID: 597221464084603319}
+--- !u!114 &7343496847334505478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597221464054765120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a7cf8242f01aeb4088aeac4a39e1b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelText: {fileID: 597221462616753959}
+  _valueExperience: {fileID: 597221463103904452}
+  _playerCharacteristics: {fileID: 11400000, guid: 27bf7a3a881069e41918a61be823d2a5, type: 2}
 --- !u!1 &597221464084603312
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3f85956a62f384fb4817391ec083ee, type: 3}
+  m_Name: Alisa
+  m_EditorClassIdentifier: 
+  _playerData:
+    speed: 200
+    baseAttack: 200
+    health: 200
+    coins: -195
+    playerName: Alisa
+  Name: Alisa
+  PrefabCharacter: {fileID: 6390148200560269377, guid: 0bd40dbf3176bcb40a6e63bebf40094b, type: 3}

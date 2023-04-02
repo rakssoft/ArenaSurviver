@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private PlayerCharacteristics _character;
     [SerializeField] private GameObject _characterPrefab;
      [SerializeField] private GameObject[]  _listPanels;
     [SerializeField] private int _indexStartPanel;

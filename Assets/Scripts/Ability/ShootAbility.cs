@@ -9,6 +9,7 @@ public class ShootAbility : Ability
     [SerializeField] private float _baseDamage;
     [SerializeField] private int _basePenetration;
     [SerializeField] private int _currentLevel;
+    [SerializeField] private PlayerCharacteristics _character;
     
     private int _currentPenetration;
     private float _currentDamage;
@@ -16,6 +17,7 @@ public class ShootAbility : Ability
 
     private void OnEnable()
     {
+        _baseDamage = _character.BaseAttack;
         _currentLevel = Level;
         _currentPenetration = _basePenetration;
         _currentDamage = _baseDamage;

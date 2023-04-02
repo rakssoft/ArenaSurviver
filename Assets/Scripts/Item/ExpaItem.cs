@@ -20,7 +20,7 @@ public class ItemCollisionHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerCharacteristics player))
+        if (other.TryGetComponent(out Experience player))
         {
             player.TakeExperience(ValueCollision);
             Destroy(gameObject);

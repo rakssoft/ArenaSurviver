@@ -14,13 +14,14 @@ public class EnemyAttack : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent<PlayerCharacteristics>(out PlayerCharacteristics _player))
+
+        if (other.TryGetComponent(out Health player))
         {
             _timer -= Time.deltaTime;
             if(_timer <= 0)
             {
                 _timer = _rateOfFire;
-                _player.TakeDamage(_damage);
+                player.TakeDamage(_damage);
             }
         }
     }

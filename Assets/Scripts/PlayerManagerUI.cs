@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Cinemachine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManagerUI : MonoBehaviour
 {
     [SerializeField] private PlayerController _player;
     [SerializeField] private GameObject _spawnPlayer;

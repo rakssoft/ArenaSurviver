@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerController), typeof(PlayerCharacteristics))]
+
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private Animator _animator;
     [SerializeField] private PlayerCharacteristics _playerCharacteristics;
+    [SerializeField]  private float _rotationSpeed;
     private float _movementSpeed;
-    private float _rotationSpeed;
 
 
     private void FixedUpdate()
@@ -41,7 +41,6 @@ public class PlayerMove : MonoBehaviour
 
     private void RotateTowardMovementVector(Vector3 movementDirection)
     {
-        _rotationSpeed = _playerCharacteristics.SpeedRotations;
         if (movementDirection.magnitude == 0)
         {
             return;

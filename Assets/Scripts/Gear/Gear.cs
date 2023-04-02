@@ -15,8 +15,7 @@ public float Lucky;
     {
         head = 0,
         chest = 1,
-        foot = 2,
-        beads = 3,
+        foot = 2, beads = 3,
         amulet = 4,
         belt = 5
     }

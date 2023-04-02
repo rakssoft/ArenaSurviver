@@ -14,7 +14,7 @@ public class IncreaseMaxiHealthAbility : Ability
     }
     public override void Activate(GameObject parent)
     {
-        if (parent.TryGetComponent(out PlayerCharacteristics player))
+        if (parent.TryGetComponent(out Health player))
         {
             player.IncreaseMaxHealth(_currentIncreaseHealth);
         }

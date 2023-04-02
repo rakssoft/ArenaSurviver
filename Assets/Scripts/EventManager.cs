@@ -15,6 +15,8 @@ public static class EventManager
     public static UnityAction<Ability> AddAbility;
     public static UnityAction<int> IndexAudioClipPlay;
     public static UnityAction<bool> BatttleIsWon;
+    public static UnityAction SaveDataBase;
+    
 
                             
 }

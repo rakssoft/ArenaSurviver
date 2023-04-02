@@ -19,10 +19,11 @@ MonoBehaviour:
   Duration: 0.1
   Level: 1
   state: 2
-  activeTime: -0.00044087647
-  cooldownTime: 0.85123104
+  activeTime: -0.016718
+  cooldownTime: 0.8768463
   _radiusSphere: 15
   _bulletPrefab: {fileID: 2502360562810321727, guid: c40bc701221d1664a971f7dbce950414, type: 3}
   _baseDamage: 10
   _basePenetration: 1
   _currentLevel: 1
+  _character: {fileID: 11400000, guid: 27bf7a3a881069e41918a61be823d2a5, type: 2}
