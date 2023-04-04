@@ -1,7 +1,8 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
-[Serializable]
+[System.Serializable]
 public class PlayerData
 {
     public float speed;
@@ -9,6 +10,7 @@ public class PlayerData
     public float health;
     public int coins;
     public string playerName;
+    public List<GearData> gearList; // Список одежды
 
 
     public PlayerData(float speed, float baseAttack, float health, int coins, string playerName)
@@ -18,6 +20,17 @@ public class PlayerData
         this.health = health;
         this.coins = coins;
         this.playerName = playerName;
+        this.gearList = new List<GearData>();
+    }
+
+    public void AddGear(GearData gear)
+    {
+        gearList.Add(gear);
+    }
+
+    public void RemoveGear(GearData gear)
+    {
+        gearList.Remove(gear);
     }
 
     public void Load()

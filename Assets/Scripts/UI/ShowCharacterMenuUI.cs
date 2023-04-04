@@ -10,11 +10,14 @@ public class ShowCharacterMenuUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _speed;
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private PlayerManager _playerManager;
+    
     [SerializeField] private PlayerCharacteristics[] _playersCharacteristics;
     [SerializeField] private GameObject _spawnPositionCharacter;
+
+    [SerializeField] private PlayerDataManager playerDataManager;
     private PlayerCharacteristics _character;
     private GameObject characterObject;
-
+    private PlayerData _playerData;
     
     private int _characterChooseActive;
 
@@ -65,7 +68,7 @@ public class ShowCharacterMenuUI : MonoBehaviour
     public void Upgrade()
     {
         CloseShowUI();
-        PlayerCharacteristics player = _playersCharacteristics[GetActiveCharacter()];
+        PlayerCharacteristics player = GetPlayerCharacteristcs();
         _playerManager.Upgrade(5,5,5,5, player);
         ShowUI(GetActiveCharacter());
 
@@ -75,10 +78,20 @@ public class ShowCharacterMenuUI : MonoBehaviour
     {
         return PlayerPrefs.GetInt("activeCharacter");
     }
+    public PlayerData GetPlayerData()
+    {
+        _playerData = playerDataManager.GetPlayerData(_playersCharacteristics[GetActiveCharacter()].Name);
+        return _playerData;
+    }
+    public PlayerCharacteristics GetPlayerCharacteristcs()
+    {
+        _character = _playersCharacteristics[GetActiveCharacter()];
+        return _character;
+    }
 
     private void ShowUI(int indexPlayers)
     {
-
+        CloseShowUI();
         _name.text = _playersCharacteristics[indexPlayers].Name.ToString();
         _health.text = _playersCharacteristics[indexPlayers].MaxHealth.ToString("F0");
         _damage.text = _playersCharacteristics[indexPlayers].BaseAttack.ToString("F0");
@@ -88,6 +101,8 @@ public class ShowCharacterMenuUI : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(direction);
         characterObject = Instantiate(_character.PrefabCharacter, _spawnPositionCharacter.transform.position, rotation);
     }
+
+ 
 
 
 }

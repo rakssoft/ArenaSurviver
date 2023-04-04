@@ -1,1 +1,1 @@
-{"speed":200.0,"baseAttack":200.0,"health":200.0,"coins":-195,"playerName":"Alisa"}
+{"speed":30.0,"baseAttack":30.0,"health":480.0,"coins":-30,"playerName":"Alisa","gearList":[{"gearType":0,"gearName":"Head","armor":10.0},{"gearType":0,"gearName":"ChelmetT1","armor":10.0},{"gearType":0,"gearName":"ChestT1","armor":20.0},{"gearType":0,"gearName":"ChestT1","armor":20.0},{"gearType":0,"gearName":"ChelmetT1","armor":10.0}]}
