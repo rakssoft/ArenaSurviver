@@ -9,6 +9,7 @@ public abstract class Gear : ScriptableObject
     public Sprite SpriteCharackteristic;
     public float Value;
     public GearStyle EquipmentType;
+    public float Price;
     public enum GearStyle
     {
         head = 0,

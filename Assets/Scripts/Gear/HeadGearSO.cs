@@ -5,23 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Gear", menuName = "Gear/Head")]
 public class HeadGearSO : Gear
 {
-    
     private float Armor;
-
+    public HeadGearSO(GearData gearData)
+    {
+        Name = gearData.gearName;
+        Armor = gearData.armor;
+        Value = Armor;
+        EquipmentType = GearStyle.head;
+        Sprite = Resources.Load<Sprite>("HeadGearSprite"); // пример, как загрузить спрайт
+    }
 
     public override void Equip(PlayerData playerData, PlayerCharacteristics character)
     {
-        Armor = Value;
-        GearData gearData = new GearData(GearStyle.head, name, Armor);
-        playerData.AddGear(gearData);
-
-
-        playerData.IncreaseMaxHealth(Armor);
+        
+        playerData.AddGear(new GearData(GearStyle.head, Name, Value, Sprite.name));
+        playerData.IncreaseMaxHealth(Value);
         character.SetPlayerData(playerData);
-
-
     }
 
-
-
 }
+
+
+

@@ -14,9 +14,13 @@ public class PlayerCharacteristics : ScriptableObject
 
     private void OnEnable()
     {
-        // Загрузка данных из файла при загрузке скриптабельного объекта
-        _playerData = new PlayerData(10.0f, 5, 100, 0, Name);
-        _playerData.Load();
+      
+
+            string playerName = Name; // имя игрока можно получить из настроек
+            _playerData = new PlayerData(10.0f, 5, 100, 0, playerName, false);            
+            _playerData.Load();
+ 
+
     }
 
     private void OnDisable()
@@ -34,8 +38,11 @@ public class PlayerCharacteristics : ScriptableObject
         _playerData.baseAttack = playerData.baseAttack;
         _playerData.health = playerData.health;
         _playerData.coins = playerData.coins;
+        _playerData.playerName = playerData.playerName;
+        _playerData.gearList = playerData.gearList;
         Name = playerData.playerName;
     }
+
 
 
 }

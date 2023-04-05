@@ -4,12 +4,12 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private List<PlayerCharacteristics> _playerCharacteristicsList;
-    private PlayerDataManager _playerDataManager;
+    [SerializeField] private PlayerDataManager _playerDataManager;
 
     private void Start()
     {
 
-        _playerDataManager = FindObjectOfType<PlayerDataManager>();
+
         if (_playerDataManager == null)
         {
             Debug.LogWarning("PlayerDataManager not found in the scene, creating a new one...");
@@ -18,12 +18,14 @@ public class PlayerManager : MonoBehaviour
 
         foreach (var playerCharacteristics in _playerCharacteristicsList)
         {
-            var playerData = new PlayerData(playerCharacteristics.Speed, playerCharacteristics.BaseAttack, playerCharacteristics.MaxHealth, playerCharacteristics.Coins, playerCharacteristics.Name);
+            var playerData = new PlayerData(playerCharacteristics.Speed, playerCharacteristics.BaseAttack, playerCharacteristics.MaxHealth, playerCharacteristics.Coins, playerCharacteristics.Name, false);
+
             if (!_playerDataManager.PlayerExists(playerCharacteristics.Name))
             {
                 _playerDataManager.AddPlayer(playerCharacteristics.Name, playerData);
             }
         }
+
     }
 
     public void Upgrade(float healthIncrease, float damageIncrease, float speedIncrease, int coinsSpent, PlayerCharacteristics Character)

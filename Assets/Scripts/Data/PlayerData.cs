@@ -5,6 +5,28 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PlayerData
 {
+    // ƒобавл€ем новый параметр дл€ загрузки данных из сохранени€
+    public PlayerData(float speed, float baseAttack, float health, int coins, string playerName, bool useSavedData)
+    {
+        if (useSavedData)
+        {
+            Load();
+        }
+        else
+        {
+            this.speed = speed;
+            this.baseAttack = baseAttack;
+            this.health = health;
+            this.coins = coins;
+            this.playerName = playerName;
+            this.gearList = new List<GearData>();
+        }
+    
+
+        this.playerName = playerName;
+        this.gearList = new List<GearData>();
+    }
+
     public float speed;
     public float baseAttack;
     public float health;
@@ -13,36 +35,40 @@ public class PlayerData
     public List<GearData> gearList; // —писок одежды
 
 
-    public PlayerData(float speed, float baseAttack, float health, int coins, string playerName)
-    {
-        this.speed = speed;
-        this.baseAttack = baseAttack;
-        this.health = health;
-        this.coins = coins;
-        this.playerName = playerName;
-        this.gearList = new List<GearData>();
-    }
-
     public void AddGear(GearData gear)
     {
         gearList.Add(gear);
+        Save();
     }
 
     public void RemoveGear(GearData gear)
     {
         gearList.Remove(gear);
+        Save();
     }
 
     public void Load()
     {
-        string path = Application.dataPath + "/Data/" + playerName + ".json";
+        string fileName = playerName + ".json";
+        string path = Application.persistentDataPath + "/" + fileName;
 
-        //  string path = Application.persistentDataPath + "/Data/" + playerName + ".json";
-
+   //     string path = Application.dataPath + "/Data/" + playerName + ".json";
         if (System.IO.File.Exists(path))
         {
             string json = System.IO.File.ReadAllText(path);
-            JsonUtility.FromJsonOverwrite(json, this);
+            PlayerData savedData = JsonUtility.FromJson<PlayerData>(json);
+            if (savedData != null)
+            {
+                speed = savedData.speed;
+                baseAttack = savedData.baseAttack;
+                health = savedData.health;
+                coins = savedData.coins;
+                gearList = savedData.gearList;       
+            }
+            else
+            {
+                Debug.Log("Failed to load player data from file: " + playerName);
+            }
         }
         else
         {
@@ -50,12 +76,14 @@ public class PlayerData
         }
     }
 
+
+
+
     public void Save()
     {
-        ///  дл€ сохранени€ в приложении
-      //  string path = Application.persistentDataPath + "/" + playerName + ".json";
-        string path = Application.dataPath + "/Data/" + playerName + ".json";
-
+        string path = Application.persistentDataPath + "/" + playerName + ".json";
+              
+        //  string path = Application.dataPath + "/Data/" + playerName + ".json";
         string json = JsonUtility.ToJson(this);
         System.IO.File.WriteAllText(path, json);
     }

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Cop
   m_EditorClassIdentifier: 
   _playerData:
-    speed: 101
-    baseAttack: 101
-    health: 101
-    coins: -90
+    speed: 10
+    baseAttack: 10
+    health: 100
+    coins: 0
     playerName: Cop
+    gearList: []
   Name: Cop
   PrefabCharacter: {fileID: 1283017171755564, guid: f10c394033f254647873f3d28a75a062, type: 3}

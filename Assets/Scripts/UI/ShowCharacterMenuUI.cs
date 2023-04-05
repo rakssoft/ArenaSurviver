@@ -17,7 +17,7 @@ public class ShowCharacterMenuUI : MonoBehaviour
     [SerializeField] private PlayerDataManager playerDataManager;
     private PlayerCharacteristics _character;
     private GameObject characterObject;
-    private PlayerData _playerData;
+    public PlayerData _playerData;
     
     private int _characterChooseActive;
 
@@ -36,10 +36,12 @@ public class ShowCharacterMenuUI : MonoBehaviour
     public void ShowCharackers()
     {
         ShowUI(GetActiveCharacter());
+        GetPlayerData();
     }
 
     public void ChooseCharacter(int index)
     {
+        
         _characterChooseActive += index;
         if(_characterChooseActive <= 0)
         {
@@ -53,7 +55,7 @@ public class ShowCharacterMenuUI : MonoBehaviour
             PlayerPrefs.SetInt("activeCharacter", _characterChooseActive);
         }
         PlayerPrefs.SetInt("activeCharacter", _characterChooseActive);
-
+        GetPlayerData();
         ShowUI(GetActiveCharacter());
     }
 

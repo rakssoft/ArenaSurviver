@@ -5,7 +5,7 @@ using System.Linq;
 public class PlayerDataManager : MonoBehaviour
 {
     public List<PlayerData> playerDataList = new List<PlayerData>();
-
+    [SerializeField] private PlayerManager _playerManager;
     private void Awake()
     {
         Load();
@@ -22,6 +22,7 @@ public class PlayerDataManager : MonoBehaviour
         playerData.playerName = playerName;
         playerDataList.Add(playerData);
     }
+
 
 
     public PlayerData GetPlayerData(string playerName)
@@ -47,8 +48,8 @@ public class PlayerDataManager : MonoBehaviour
         playerDataList.Clear();
 
         /// прикомпиляции сделать сохранение так.
-      //  string[] saveFiles = System.IO.Directory.GetFiles(Application.persistentDataPath, "*.json");
-        string[] saveFiles = System.IO.Directory.GetFiles(Application.dataPath + "/Data/",  "*.json");
+        string[] saveFiles = System.IO.Directory.GetFiles(Application.persistentDataPath, "*.json");
+     //   string[] saveFiles = System.IO.Directory.GetFiles(Application.dataPath + "/Data/",  "*.json");
 
 
         foreach (string saveFile in saveFiles)
@@ -56,6 +57,17 @@ public class PlayerDataManager : MonoBehaviour
             string json = System.IO.File.ReadAllText(saveFile);
             PlayerData playerData = JsonUtility.FromJson<PlayerData>(json);
             playerDataList.Add(playerData);
+          
+
+        }
+        // Назначаем данные персонажам
+        foreach (PlayerCharacteristics playerCharacteristics in FindObjectsOfType<PlayerCharacteristics>())
+        {
+            PlayerData playerData = GetPlayerData(playerCharacteristics.Name);
+            if (playerData != null)
+            {
+                playerCharacteristics.SetPlayerData(playerData);
+            }
         }
     }
 

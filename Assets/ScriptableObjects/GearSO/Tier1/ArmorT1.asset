@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 022ab5e34d23b674baa54f9b34a95381, type: 3}
-  m_Name: ChestT1
+  m_Script: {fileID: 11500000, guid: c4e35227d9e1380468c1842c2921e221, type: 3}
+  m_Name: ArmorT1
   m_EditorClassIdentifier: 
-  Name: ChesrArmor
+  Name: Armor
   TierGear: 1
-  Sprite: {fileID: 21300000, guid: 3f7035d4263aa1a4b968754d4753d5b5, type: 3}
-  SpriteCharackteristic: {fileID: 21300040, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+  Sprite: {fileID: 21300000, guid: 727b14d7f2cdd5e48b0d095e5f4d7b0d, type: 3}
+  SpriteCharackteristic: {fileID: 21300000, guid: ee017e651e4e3d54ab1bfaed9e12e9c2, type: 3}
   Value: 20
   EquipmentType: 1
+  Price: 100
