@@ -23,9 +23,7 @@ public class InventoryData
             if (savedData != null)
             {
                 gearList = savedData.gearList;
-                Debug.Log("Loaded player data from file: " + gearList);
-                Debug.Log("Player data: " + json);
-                Debug.Log("Loaded inventory data from file.");
+      
             }
             else
             {

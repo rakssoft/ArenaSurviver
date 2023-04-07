@@ -4,23 +4,20 @@ using UnityEngine;
 public class PlayerCharacteristics : ScriptableObject
 {
     [SerializeField] private PlayerData _playerData;
-
+    [SerializeField] private bool _unlocked;
     public float Speed => _playerData.speed;
     public float BaseAttack => _playerData.baseAttack;
     public float MaxHealth => _playerData.health;
     public int Coins => _playerData.coins;
     public string Name;
     public GameObject PrefabCharacter;
+    public bool Unlocked => _unlocked;
 
     private void OnEnable()
     {
-      
-
-            string playerName = Name; // имя игрока можно получить из настроек
-            _playerData = new PlayerData(10.0f, 5, 100, 0, playerName, false);            
-            _playerData.Load();
- 
-
+        string playerName = Name; // имя игрока можно получить из настроек
+        _playerData = new PlayerData(10.0f, 5, 100, 0, playerName, false);
+        _playerData.Load();
     }
 
     private void OnDisable()
@@ -31,7 +28,6 @@ public class PlayerCharacteristics : ScriptableObject
             _playerData.Save();
         }
     }
-
     public void SetPlayerData(PlayerData playerData)
     {
         _playerData.speed = playerData.speed;
@@ -41,6 +37,20 @@ public class PlayerCharacteristics : ScriptableObject
         _playerData.playerName = playerData.playerName;
         _playerData.gearList = playerData.gearList;
         Name = playerData.playerName;
+    }
+    public void Unlock()
+    {
+        _unlocked = true;
+    }
+
+    public bool Purchase(int coins)
+    {
+        if (Coins >= coins)
+        {
+            _playerData.DecreaseCoins(coins);
+            return true;
+        }
+        return false;
     }
 
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct GearStyle
@@ -20,6 +21,7 @@ public class GearInventory : MonoBehaviour
     [SerializeField] private PlayerDataManager _playerDataManager;
     [SerializeField] private List<GameObject> _equippedGears = new List<GameObject>();
     [SerializeField] private InventoryBlock _inventoryBlock;
+    [SerializeField] private Sprite _test;
 
 
 
@@ -61,7 +63,8 @@ public class GearInventory : MonoBehaviour
                     if (_slotsTransform[j].EquipmentType == gear.EquipmentType)
                     {
                         GameObject gearUI = Instantiate(_gearUIPrefab, _slotsTransform[j].SlotTransform);  // создаем префаб
-                        gearUI.GetComponent<GearUI>().ShowGear(gear);                      
+                        gearUI.GetComponent<GearUI>().ShowGear(gear);
+                        
                         gear.Equip(_showCharacterMenuUI.GetPlayerData(),_showCharacterMenuUI.GetPlayerCharacteristcs());
                         ShowDataCharacter();
                         _inventoryBlock.EquipGear(gear);
@@ -99,6 +102,9 @@ public class GearInventory : MonoBehaviour
         foreach (GearData gearData in tempList)
         {
             Gear gear = CreateGearInstance(gearData);
+
+
+         
             if (gear != null)
             {
                 for (int i = 0; i < _gearsEquipOn.Length; i++)
@@ -109,8 +115,12 @@ public class GearInventory : MonoBehaviour
                         {
                             if (_slotsTransform[j].EquipmentType == gear.EquipmentType)
                             {
+                                gear.SpriteCharackteristic = _gearsEquipOn[i].SpriteCharackteristic;
                                 GameObject gearUI = Instantiate(_gearUIPrefab, _slotsTransform[j].SlotTransform);  // создаем префаб
-                                gearUI.GetComponent<GearUI>().ShowGear(gear);                            
+                                
+          
+                             
+                                gearUI.GetComponent<GearUI>().ShowGear(gear);
                                 _equippedGears.Add(gearUI);
                                 
                             }

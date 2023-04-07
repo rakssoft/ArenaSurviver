@@ -14,7 +14,7 @@ public class InventoryBlock : MonoBehaviour
 
     public void ShowAllEquips()
     {
-        сделать чтобы при создании префаба передавать данные чтобы юай префаба гира отображалс€ в прошлой версии это был старт. Ќужно сделать принудительно.
+
         _inventoryData.Load();
         _allEquipsBufer.Clear();
         _allEquips = _inventoryData.gearList;

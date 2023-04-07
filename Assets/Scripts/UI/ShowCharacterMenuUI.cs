@@ -41,17 +41,17 @@ public class ShowCharacterMenuUI : MonoBehaviour
 
     public void ChooseCharacter(int index)
     {
-        
+    
         _characterChooseActive += index;
-        if(_characterChooseActive <= 0)
+        if(_characterChooseActive < 0)
         {
-            _characterChooseActive = 0;
+            _characterChooseActive = _playersCharacteristics.Length -1;
             PlayerPrefs.SetInt("activeCharacter", _characterChooseActive);
 
         }
-        if(_characterChooseActive >= _playersCharacteristics.Length)
+        if(_characterChooseActive > _playersCharacteristics.Length - 1)
         {
-            _characterChooseActive = _playersCharacteristics.Length -1;
+            _characterChooseActive = 0;
             PlayerPrefs.SetInt("activeCharacter", _characterChooseActive);
         }
         PlayerPrefs.SetInt("activeCharacter", _characterChooseActive);
@@ -66,15 +66,17 @@ public class ShowCharacterMenuUI : MonoBehaviour
             Destroy(characterObject);
         }       
     }
+    /// <summary>
+    /// Тестовая функци для пробы апгрейда персонажа. На нее можно будет что то сделать
+    /// </summary>
+    /*    public void Upgrade()
+        {
+            CloseShowUI();
+            PlayerCharacteristics player = GetPlayerCharacteristcs();
+            _playerManager.Upgrade(5,5,5,5, player);
+            ShowUI(GetActiveCharacter());
 
-    public void Upgrade()
-    {
-        CloseShowUI();
-        PlayerCharacteristics player = GetPlayerCharacteristcs();
-        _playerManager.Upgrade(5,5,5,5, player);
-        ShowUI(GetActiveCharacter());
-
-    }
+        }*/
 
     private int GetActiveCharacter()
     {

@@ -11,14 +11,14 @@ public class GearUI : MonoBehaviour
     [SerializeField] private Image _spriteCharacteristic;
     [SerializeField] private TextMeshProUGUI _valueCharacteristic;
 
-    
 
-/*    private void Start()
+
+    private void Start()
     {
         _spriteGear.sprite = _gear.Sprite;
         _spriteCharacteristic.sprite = _gear.SpriteCharackteristic;
         _valueCharacteristic.text = _gear.Value.ToString();
-    }*/
+    }
     public void EquipGear()
     {
         EventManager.EquipGearEvent?.Invoke(_gear);
@@ -29,7 +29,13 @@ public class GearUI : MonoBehaviour
     {
         _gear = gear;
         _spriteGear.sprite = _gear.Sprite;
-        _spriteCharacteristic.sprite = _gear.SpriteCharackteristic;
+       
         _valueCharacteristic.text = _gear.Value.ToString();
+    }
+
+ 
+    public void SriteCharackteristick(Sprite sprite)
+    {
+        _spriteCharacteristic.sprite = sprite;
     }
 }

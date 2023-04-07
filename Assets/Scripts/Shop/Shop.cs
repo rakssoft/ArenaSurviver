@@ -8,9 +8,18 @@ public class Shop : MonoBehaviour
     [SerializeField] private List<GearShopUI> _gearListShop = new List<GearShopUI>();
     [SerializeField] private Transform _shopTransform;
     [SerializeField] private GearShopUI _prefabGearShopUI;
+    [SerializeField] private InventoryBlock _inventoryBlock;
 
 
 
+    private void OnEnable()
+    {
+        EventManager.PurchaseCompleted += AddEqupipInInventory;
+    }
+    private void OnDisable()
+    {
+        EventManager.PurchaseCompleted -= AddEqupipInInventory;
+    }
     public void FillShop()
     {
         _gearListShop.Clear();
@@ -23,6 +32,7 @@ public class Shop : MonoBehaviour
     }
 
 
+
     private int RandomValueFillShop()
     {
         int ValueFillShop = Random.RandomRange(0, 5);
@@ -33,6 +43,12 @@ public class Shop : MonoBehaviour
     {
         int ValueValueGear = Random.RandomRange(0, _gears.Count);
         return ValueValueGear;
+    }
+
+    private void AddEqupipInInventory(Gear gear)
+    {
+        _inventoryBlock.AddGearBlock(gear);
+       
     }
 
 

@@ -13,6 +13,7 @@ public class HeadGearSO : Gear
         Value = Armor;
         EquipmentType = GearStyle.head;
         Sprite = Resources.Load<Sprite>("HeadGearSprite"); // пример, как загрузить спрайт
+
     }
 
     public override void Equip(PlayerData playerData, PlayerCharacteristics character)

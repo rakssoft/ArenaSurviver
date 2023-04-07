@@ -19,5 +19,6 @@ MonoBehaviour:
     coins: 0
     playerName: Cop
     gearList: []
+  _unlocked: 0
   Name: Cop
   PrefabCharacter: {fileID: 1283017171755564, guid: f10c394033f254647873f3d28a75a062, type: 3}
