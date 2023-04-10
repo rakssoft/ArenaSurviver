@@ -47,6 +47,6 @@ MonoBehaviour:
       gearName: Chelmet
       armor: 10
       spriteName: HeadGearSprite
-  _unlocked: 0
+  _unlocked: 1
   Name: Alisa
   PrefabCharacter: {fileID: 6390148200560269377, guid: 0bd40dbf3176bcb40a6e63bebf40094b, type: 3}

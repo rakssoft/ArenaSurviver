@@ -43,15 +43,7 @@ public class PlayerCharacteristics : ScriptableObject
         _unlocked = true;
     }
 
-    public bool Purchase(int coins)
-    {
-        if (Coins >= coins)
-        {
-            _playerData.DecreaseCoins(coins);
-            return true;
-        }
-        return false;
-    }
+  
 
 
 

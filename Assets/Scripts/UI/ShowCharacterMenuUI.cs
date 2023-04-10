@@ -18,7 +18,8 @@ public class ShowCharacterMenuUI : MonoBehaviour
     private PlayerCharacteristics _character;
     private GameObject characterObject;
     public PlayerData _playerData;
-    
+    private bool unLocked;
+
     private int _characterChooseActive;
 
     private void Start()
@@ -103,10 +104,32 @@ public class ShowCharacterMenuUI : MonoBehaviour
         _character = _playersCharacteristics[indexPlayers];
         Vector3 direction = Camera.main.transform.position - _spawnPositionCharacter.transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
+
         characterObject = Instantiate(_character.PrefabCharacter, _spawnPositionCharacter.transform.position, rotation);
+        if (IsUnlookCharacter(GetPlayerCharacteristcs()) == true)
+        {
+            characterObject.GetComponent<Animator>().enabled = true;
+        }
+        else
+        {
+            characterObject.GetComponent<Animator>().enabled = false;
+        }
     }
 
- 
+    public bool IsUnlookCharacter(PlayerCharacteristics character)
+    {
+        if (character.Unlocked)
+        {
+            unLocked = true;
+        }
+        else
+        {
+            unLocked = false;
+        }
+        return unLocked;
+    }
+
+
 
 
 }
