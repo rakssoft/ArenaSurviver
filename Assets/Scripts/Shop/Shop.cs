@@ -31,8 +31,6 @@ public class Shop : MonoBehaviour
         }
     }
 
-
-
     private int RandomValueFillShop()
     {
         int ValueFillShop = Random.RandomRange(0, 5);

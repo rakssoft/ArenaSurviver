@@ -18,6 +18,7 @@ public static class EventManager
     public static UnityAction SaveDataBase;
     public static UnityAction<Gear> EquipGearEvent;
     public static UnityAction<Gear> PurchaseCompleted;
+    public static UnityAction<PlayerCharacteristics> AddPlayerCharacteristics;
 
 
 

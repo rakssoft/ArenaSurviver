@@ -24,6 +24,11 @@ public class HeadGearSO : Gear
         character.SetPlayerData(playerData);
     }
 
+    public override void UnEquip(PlayerData player, PlayerCharacteristics character)
+    {
+        Debug.Log("snyat predmet");
+    }
+
 }
 
 

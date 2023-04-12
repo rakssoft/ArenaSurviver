@@ -1,4 +1,4 @@
-
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -9,18 +9,24 @@ public class ShowCharacterMenuUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _damage;
     [SerializeField] private TextMeshProUGUI _speed;
     [SerializeField] private TextMeshProUGUI _name;
-    [SerializeField] private PlayerManager _playerManager;
-    
-    [SerializeField] private PlayerCharacteristics[] _playersCharacteristics;
+    [SerializeField] private PlayerManager _playerManager;    
+    [SerializeField] private  List<PlayerCharacteristics>  _playersCharacteristics = new List<PlayerCharacteristics>();
     [SerializeField] private GameObject _spawnPositionCharacter;
-
     [SerializeField] private PlayerDataManager playerDataManager;
     private PlayerCharacteristics _character;
     private GameObject characterObject;
     public PlayerData _playerData;
-    private bool unLocked;
 
     private int _characterChooseActive;
+
+    private void OnEnable()
+    {
+        EventManager.AddPlayerCharacteristics += AddCharactersInChoose;
+    }
+    private void OnDisable()
+    {
+        EventManager.AddPlayerCharacteristics -= AddCharactersInChoose;
+    }
 
     private void Start()
     {
@@ -33,24 +39,28 @@ public class ShowCharacterMenuUI : MonoBehaviour
             _characterChooseActive = PlayerPrefs.GetInt("activeCharacter");
         }
     }
-
     public void ShowCharackers()
     {
         ShowUI(GetActiveCharacter());
         GetPlayerData();
     }
+    public void CloseShowUI()
+    {
+        if (characterObject)
+        {
+            Destroy(characterObject);
+        }
+    }
 
     public void ChooseCharacter(int index)
-    {
-    
+    {    
         _characterChooseActive += index;
         if(_characterChooseActive < 0)
         {
-            _characterChooseActive = _playersCharacteristics.Length -1;
+            _characterChooseActive = _playersCharacteristics.Count -1;
             PlayerPrefs.SetInt("activeCharacter", _characterChooseActive);
-
         }
-        if(_characterChooseActive > _playersCharacteristics.Length - 1)
+        if(_characterChooseActive > _playersCharacteristics.Count - 1)
         {
             _characterChooseActive = 0;
             PlayerPrefs.SetInt("activeCharacter", _characterChooseActive);
@@ -59,26 +69,11 @@ public class ShowCharacterMenuUI : MonoBehaviour
         GetPlayerData();
         ShowUI(GetActiveCharacter());
     }
-
-    public void CloseShowUI()
+    
+    public void AddCharactersInChoose(PlayerCharacteristics playerCharacteristics)
     {
-        if (characterObject)
-        {
-            Destroy(characterObject);
-        }       
+        _playersCharacteristics.Add(playerCharacteristics);
     }
-    /// <summary>
-    /// Тестовая функци для пробы апгрейда персонажа. На нее можно будет что то сделать
-    /// </summary>
-    /*    public void Upgrade()
-        {
-            CloseShowUI();
-            PlayerCharacteristics player = GetPlayerCharacteristcs();
-            _playerManager.Upgrade(5,5,5,5, player);
-            ShowUI(GetActiveCharacter());
-
-        }*/
-
     private int GetActiveCharacter()
     {
         return PlayerPrefs.GetInt("activeCharacter");
@@ -94,6 +89,10 @@ public class ShowCharacterMenuUI : MonoBehaviour
         return _character;
     }
 
+    /// <summary>
+    /// Отображает персонажа по индексу в списке.
+    /// </summary>
+    /// <param name="indexPlayers"></param>
     private void ShowUI(int indexPlayers)
     {
         CloseShowUI();
@@ -104,30 +103,22 @@ public class ShowCharacterMenuUI : MonoBehaviour
         _character = _playersCharacteristics[indexPlayers];
         Vector3 direction = Camera.main.transform.position - _spawnPositionCharacter.transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
-
         characterObject = Instantiate(_character.PrefabCharacter, _spawnPositionCharacter.transform.position, rotation);
-        if (IsUnlookCharacter(GetPlayerCharacteristcs()) == true)
-        {
-            characterObject.GetComponent<Animator>().enabled = true;
-        }
-        else
-        {
-            characterObject.GetComponent<Animator>().enabled = false;
-        }
     }
 
-    public bool IsUnlookCharacter(PlayerCharacteristics character)
-    {
-        if (character.Unlocked)
+    /// <summary>
+    /// Тестовая функци для пробы апгрейда персонажа. На нее можно будет что то сделать
+    /// </summary>
+    /*    public void Upgrade()
         {
-            unLocked = true;
-        }
-        else
-        {
-            unLocked = false;
-        }
-        return unLocked;
-    }
+            CloseShowUI();
+            PlayerCharacteristics player = GetPlayerCharacteristcs();
+            _playerManager.Upgrade(5,5,5,5, player);
+            ShowUI(GetActiveCharacter());
+
+        }*/
+
+
 
 
 

@@ -13,7 +13,7 @@ public struct GearStyle
 }
 public class GearInventory : MonoBehaviour
 {
-    [SerializeField] private Gear[] _gearsEquipOn;  // надета€ одежда 
+    [SerializeField] private Gear[] _gearsEquipOn;  // вс€ одежда 
     [SerializeField] private GameObject _gearUIPrefab;
     [SerializeField] private GearStyle[] _slotsTransform;
     [SerializeField] private ShowCharacterMenuUI _showCharacterMenuUI;
@@ -21,7 +21,8 @@ public class GearInventory : MonoBehaviour
     [SerializeField] private PlayerDataManager _playerDataManager;
     [SerializeField] private List<GameObject> _equippedGears = new List<GameObject>();
     [SerializeField] private InventoryBlock _inventoryBlock;
-    [SerializeField] private Sprite _test;
+
+    public List<GearData> test;
 
 
 
@@ -52,28 +53,24 @@ public class GearInventory : MonoBehaviour
     private void ItemPutOn(Gear gear)
     {
         for (int i = 0; i < _gearsEquipOn.Length; i++)
-        {
-         
+        {  
             if (_gearsEquipOn[i].EquipmentType == gear.EquipmentType)
             {
-
                 for (int j = 0; j < _slotsTransform.Length; j++)
                 {
-                  
                     if (_slotsTransform[j].EquipmentType == gear.EquipmentType)
                     {
-                        GameObject gearUI = Instantiate(_gearUIPrefab, _slotsTransform[j].SlotTransform);  // создаем префаб
-                        gearUI.GetComponent<GearUI>().ShowGear(gear);
+                        gear.Equip(_showCharacterMenuUI.GetPlayerData(), _showCharacterMenuUI.GetPlayerCharacteristcs());
                         
-                        gear.Equip(_showCharacterMenuUI.GetPlayerData(),_showCharacterMenuUI.GetPlayerCharacteristcs());
-                        ShowDataCharacter();
+                        EquipAllGear();
                         _inventoryBlock.EquipGear(gear);
                         _playerData.Save();
                         _playerDataManager.Save();
-                        _equippedGears.Add(gearUI); // добавл€ем надетый предмет в список
+                        
+                   //     _equippedGears.Add(gearUI); // добавл€ем надетый предмет в список
                     }
                 }
-
+                разобратьс€ с блоком сделать или разделить на два класа или передавать гер и сразу отображать
             }
         }
     }
@@ -87,26 +84,22 @@ public class GearInventory : MonoBehaviour
         foreach (GameObject gear in _equippedGears)
         {
             Destroy(gear);
-            
         }
         _equippedGears.Clear();
-        
+
     }
 
     /// <summary>
     /// ѕри открытии инвентор€ надевай всю одежду котора€ есть уже у персонажа.
     /// </summary>
     public void EquipAllGear()
-    {
-        List<GearData> tempList = new List<GearData>(_playerData.gearList);
+    {       
+        List<GearData> tempList = new List<GearData>(_playerData.gearList);        
         foreach (GearData gearData in tempList)
         {
             Gear gear = CreateGearInstance(gearData);
-
-
-         
             if (gear != null)
-            {
+            {        
                 for (int i = 0; i < _gearsEquipOn.Length; i++)
                 {
                     if (_gearsEquipOn[i].EquipmentType == gear.EquipmentType)
@@ -117,12 +110,10 @@ public class GearInventory : MonoBehaviour
                             {
                                 gear.SpriteCharackteristic = _gearsEquipOn[i].SpriteCharackteristic;
                                 GameObject gearUI = Instantiate(_gearUIPrefab, _slotsTransform[j].SlotTransform);  // создаем префаб
-                                
-          
-                             
                                 gearUI.GetComponent<GearUI>().ShowGear(gear);
                                 _equippedGears.Add(gearUI);
-                                
+                                ShowDataCharacter();                                
+                                break;
                             }
                         }
                     }
@@ -130,8 +121,8 @@ public class GearInventory : MonoBehaviour
             }
         }
     }
-          
-            
+
+
     /// <summary>
     /// ‘ункци€ дл€ определени€ какой скрипт необоходимо вернуть дл€ одежды чтобы понимать куда надеть
     /// </summary>
@@ -145,14 +136,14 @@ public class GearInventory : MonoBehaviour
                 return new HeadGearSO(gearData);
             case Gear.GearStyle.chest:
                 return new ChestGearSO(gearData);
-/*            case Gear.GearStyle.foot:
-                return new FootGear(gearData);
-            case Gear.GearStyle.beads:
-                return new BeadsGear(gearData);
-            case Gear.GearStyle.amulet:
-                return new AmuletGear(gearData);
-            case Gear.GearStyle.belt:
-                return new BeltGear(gearData);*/
+            /*            case Gear.GearStyle.foot:
+                            return new FootGear(gearData);
+                        case Gear.GearStyle.beads:
+                            return new BeadsGear(gearData);
+                        case Gear.GearStyle.amulet:
+                            return new AmuletGear(gearData);
+                        case Gear.GearStyle.belt:
+                            return new BeltGear(gearData);*/
             default:
                 Debug.LogError($"Unsupported gear type {gearData.gearType}");
                 return null;

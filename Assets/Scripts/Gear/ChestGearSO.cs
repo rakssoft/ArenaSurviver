@@ -22,4 +22,9 @@ public class ChestGearSO : Gear
         playerData.IncreaseMaxHealth(Value);
         character.SetPlayerData(playerData);
     }
+
+    public override void UnEquip(PlayerData player, PlayerCharacteristics character)
+    {
+        throw new System.NotImplementedException();
+    }
 }

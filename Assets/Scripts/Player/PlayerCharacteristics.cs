@@ -12,6 +12,8 @@ public class PlayerCharacteristics : ScriptableObject
     public string Name;
     public GameObject PrefabCharacter;
     public bool Unlocked => _unlocked;
+    public Sprite Avatar;
+    public float Cost;
 
     private void OnEnable()
     {

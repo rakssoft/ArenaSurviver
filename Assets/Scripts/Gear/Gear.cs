@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public abstract class Gear : ScriptableObject
 {
     public string Name;
@@ -10,6 +9,7 @@ public abstract class Gear : ScriptableObject
     public float Value;
     public GearStyle EquipmentType;
     public float Price;
+
     public enum GearStyle
     {
         head = 0,
@@ -17,8 +17,11 @@ public abstract class Gear : ScriptableObject
         foot = 2,
         beads = 3,
         amulet = 4,
-        belt = 5
+        belt = 5,
+        None = 6
     }
-    public abstract void Equip(PlayerData player, PlayerCharacteristics character);
 
+    public abstract void Equip(PlayerData player, PlayerCharacteristics character);
+    public abstract void UnEquip(PlayerData player, PlayerCharacteristics character);
 }
+

@@ -41,6 +41,18 @@ public class InventoryBlock : MonoBehaviour
         _inventoryData.Save();
     }
 
+    public bool IsItEquipped(Gear gear)
+    {
+        foreach (var item in _allEquipsBufer)
+        {
+            if(item == gear)
+            {
+                return true;               
+            }
+        }
+        return false;
+    }
+
     public void EquipGear(Gear equip)
     {
         if (_allEquipsBufer.Contains(equip))
