@@ -15,26 +15,10 @@ MonoBehaviour:
   _playerData:
     speed: 10
     baseAttack: 10
-    health: 340
+    health: 420
     coins: 0
     playerName: Cop
-    gearList:
-    - gearType: 0
-      gearName: Chelmet
-      armor: 10
-      spriteName: HeadGearSprite
-    - gearType: 1
-      gearName: Chest
-      armor: 20
-      spriteName: ChestGearSprite
-    - gearType: 0
-      gearName: Chelmet
-      armor: 10
-      spriteName: HeadGearSprite
-    - gearType: 0
-      gearName: Chelmet
-      armor: 10
-      spriteName: HeadGearSprite
+    gearList: []
   _unlocked: 1
   Name: Cop
   PrefabCharacter: {fileID: 1283017171755564, guid: f10c394033f254647873f3d28a75a062, type: 3}

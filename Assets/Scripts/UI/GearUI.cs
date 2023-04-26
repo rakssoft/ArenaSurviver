@@ -10,7 +10,8 @@ public class GearUI : MonoBehaviour
     [SerializeField] private Image _spriteGear;
     [SerializeField] private Image _spriteCharacteristic;
     [SerializeField] private TextMeshProUGUI _valueCharacteristic;
-
+    public bool IsEquipped;
+    public Gear.GearStyle EquipmentType { get; private set; }
 
 
     private void Start()
@@ -21,16 +22,25 @@ public class GearUI : MonoBehaviour
     }
     public void EquipGear()
     {
-        EventManager.EquipGearEvent?.Invoke(_gear);
-        Destroy(gameObject);
+        if(IsEquipped == false)
+        {
+            EventManager.EquipGearEvent?.Invoke(_gear);
+            Destroy(gameObject);
+        }
+        else
+        {
+            EventManager.UnEquipGearEvent?.Invoke(_gear);
+            Destroy(gameObject);
+        }
+    
     }
 
     public void ShowGear(Gear gear)
     {
         _gear = gear;
-        _spriteGear.sprite = _gear.Sprite;
-       
+        _spriteGear.sprite = _gear.Sprite;      
         _valueCharacteristic.text = _gear.Value.ToString();
+        EquipmentType = _gear.EquipmentType;
     }
 
  
@@ -38,4 +48,6 @@ public class GearUI : MonoBehaviour
     {
         _spriteCharacteristic.sprite = sprite;
     }
+
+   
 }

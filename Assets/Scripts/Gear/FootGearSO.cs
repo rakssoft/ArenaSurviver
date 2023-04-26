@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Gear", menuName = "Gear/Chest")]
-public class ChestGearSO : Gear
+[CreateAssetMenu(fileName = "Gear", menuName = "Gear/Foot")]
+public class FootGearSO : Gear
 {
-     private float Armor;
-    public ChestGearSO(GearData gearData)
+    private float Armor;
+    public FootGearSO(GearData gearData)
     {
         Name = gearData.name;
         Armor = gearData.value;
         Value = Armor;
-        EquipmentType = GearStyle.chest;
-        Sprite = Resources.Load<Sprite>("ChestGearSprite"); // пример, как загрузить спрайт
+        EquipmentType = GearStyle.foot;
+        Sprite = Resources.Load<Sprite>("FootGearSprite"); // пример, как загрузить спрайт
     }
 
     public override void Equip(PlayerData playerData, PlayerCharacteristics character)
     {
 
-        playerData.AddGear(new GearData(Gear.GearStyle.chest, Name, Value, Sprite.name, InstanceID));
+        playerData.AddGear(new GearData(Gear.GearStyle.foot, Name, Value, Sprite.name, InstanceID));
         playerData.IncreaseMaxHealth(Value);
         character.SetPlayerData(playerData);
     }
@@ -48,3 +48,4 @@ public class ChestGearSO : Gear
         }
     }
 }
+

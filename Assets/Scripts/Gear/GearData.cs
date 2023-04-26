@@ -1,22 +1,22 @@
-
 using UnityEngine;
 
 [System.Serializable]
 public class GearData
 {
-    public Gear.GearStyle gearType;
-    public string gearName;
-    public float armor;
+    public Gear.GearStyle equipmentType;
+    public string name;
+    public float value;
     public string spriteName;
+    public long instanceID;
 
-    public GearData(Gear.GearStyle type, string name, float armor, string spriteName)
+    public GearData(Gear.GearStyle equipmentType, string name, float value, string spriteName, long instanceID)
     {
-        this.gearType = type;
-        this.gearName = name;
-        this.armor = armor;
+        this.equipmentType = equipmentType;
+        this.name = name;
+        this.value = value;
         this.spriteName = spriteName;
+        this.instanceID = instanceID;
     }
 }
-
 
 

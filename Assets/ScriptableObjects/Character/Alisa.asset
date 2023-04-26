@@ -14,15 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerData:
     speed: 10
-    baseAttack: 10
-    health: 250
+    baseAttack: 5
+    health: 170
     coins: 0
     playerName: Alisa
-    gearList:
-    - gearType: 0
-      gearName: Chelmet
-      armor: 10
-      spriteName: HeadGearSprite
+    gearList: []
   _unlocked: 1
   Name: Alisa
   PrefabCharacter: {fileID: 6390148200560269377, guid: 0bd40dbf3176bcb40a6e63bebf40094b, type: 3}

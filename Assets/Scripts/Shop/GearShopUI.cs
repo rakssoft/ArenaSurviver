@@ -12,7 +12,7 @@ public class GearShopUI : MonoBehaviour
     [SerializeField] private Image _spriteGear;
     [SerializeField] private Image _spriteCharacteristic;
     [SerializeField] private TextMeshProUGUI _valueCharacteristic;
-
+    
 
 
     public void ValueGear(Gear value)

@@ -14,15 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerData:
     speed: 10
-    baseAttack: 10
+    baseAttack: 5
     health: 120
     coins: 0
     playerName: Bob
-    gearList:
-    - gearType: 1
-      gearName: Chest
-      armor: 20
-      spriteName: ChestGearSprite
+    gearList: []
   _unlocked: 1
   Name: Bob
   PrefabCharacter: {fileID: 2106585151094639786, guid: 31bdf8eb5c2f2a545956e0763ca4c455, type: 3}

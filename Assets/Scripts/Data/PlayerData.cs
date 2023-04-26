@@ -38,8 +38,9 @@ public class PlayerData
     public void AddGear(GearData gear)
     {
         gearList.Add(gear);
-        Save();
+
     }
+
 
     public void RemoveGear(GearData gear)
     {

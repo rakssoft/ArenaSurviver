@@ -380,10 +380,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0450a19ef821c4386749d907921475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gear: {fileID: 11400000, guid: 36310ce6950db1648b0528fc9fc384de, type: 2}
+  _gear: {fileID: 11400000, guid: ae0cadfb91502f948910642bb7a1dd71, type: 2}
   _spriteGear: {fileID: 2635296681769229084}
   _spriteCharacteristic: {fileID: 2203433261490419220}
   _valueCharacteristic: {fileID: 6396787637279494702}
+  IsEquipped: 0
 --- !u!114 &8539670799557191937
 MonoBehaviour:
   m_ObjectHideFlags: 0
