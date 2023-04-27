@@ -11,7 +11,6 @@ public class InventoryBlock : MonoBehaviour
     [SerializeField] private Transform _equipSpawn;
     [SerializeField] private InventoryData _inventoryData;
 
-
     public void ShowAllEquips()
     {
         
@@ -52,11 +51,4 @@ public class InventoryBlock : MonoBehaviour
         CloseInventory();
         ShowAllEquips();
     }
-
-
-
-
-
-
-
 }

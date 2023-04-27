@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2304,6 +2304,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae0cadfb91502f948910642bb7a1dd71, type: 2}
   - {fileID: 11400000, guid: 36310ce6950db1648b0528fc9fc384de, type: 2}
   - {fileID: 11400000, guid: 77edaa1e40a60144e98a204bd9caab92, type: 2}
+  - {fileID: 11400000, guid: 4b50c33b8c0b0fb46b864cea3cc8f314, type: 2}
   _gearListShop: []
   _shopTransform: {fileID: 1569117722}
   _prefabGearShopUI: {fileID: -7106898520357676076, guid: e89405e61dd956740b4b5fd67f1596f4, type: 3}
@@ -5482,7 +5483,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 57665c94873465d45bef1ff371b7516c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.136
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -12270,16 +12271,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61d48835906da545ab98e2bb3cafcd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slotsTransforms:
-  - {fileID: 30292047}
-  - {fileID: 657152983}
-  - {fileID: 463538452}
-  - {fileID: 877935146}
-  - {fileID: 1800939797}
-  - {fileID: 676566023}
-  _gearsEquipOn:
+  _allGears:
   - {fileID: 11400000, guid: ae0cadfb91502f948910642bb7a1dd71, type: 2}
   - {fileID: 11400000, guid: 36310ce6950db1648b0528fc9fc384de, type: 2}
+  - {fileID: 11400000, guid: 4b50c33b8c0b0fb46b864cea3cc8f314, type: 2}
   - {fileID: 11400000, guid: 77edaa1e40a60144e98a204bd9caab92, type: 2}
   _gearUIPrefab: {fileID: 8539670799557192061, guid: c88437cf6853b8c4b93230380adbc179, type: 3}
   _slotsTransform:
@@ -12306,8 +12301,6 @@ MonoBehaviour:
   _playerDataManager: {fileID: 191452613}
   _equippedGears: []
   _inventoryBlock: {fileID: 954026924}
-  _equipmentSlots: []
-  test: []
 --- !u!114 &2004781450
 MonoBehaviour:
   m_ObjectHideFlags: 0

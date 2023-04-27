@@ -40,7 +40,7 @@ public class ChestGearSO : Gear
             playerData.RemoveGear(gearToRemove);
             playerData.IncreaseMaxHealth(Value * -1);
             character.SetPlayerData(playerData);
-            Debug.Log("Gear unequipped: " + gearToRemove.name);
+      //      Debug.Log("Gear unequipped: " + gearToRemove.name);
         }
         else
         {

@@ -13,8 +13,7 @@ public struct GearStyle
 }
 public class GearInventory : MonoBehaviour
 {
-    [SerializeField] private Transform[] _slotsTransforms;
-    [SerializeField] private Gear[] _gearsEquipOn;  // вся одежда 
+    [SerializeField] private Gear[] _allGears;  // вся одежда 
     [SerializeField] private GameObject _gearUIPrefab;
     [SerializeField] private GearStyle[] _slotsTransform;
     [SerializeField] private ShowCharacterMenuUI _showCharacterMenuUI;
@@ -22,13 +21,6 @@ public class GearInventory : MonoBehaviour
     [SerializeField] private PlayerDataManager _playerDataManager;
     [SerializeField] private List<GameObject> _equippedGears = new List<GameObject>();
     [SerializeField] private InventoryBlock _inventoryBlock;
-
-    [SerializeField] private EquipmentSlot[] _equipmentSlots;
-
-    private Dictionary<GearData, Gear> _gearInstances = new Dictionary<GearData, Gear>();
-
-    public List<GearData> test;
-
 
 
     private void OnEnable()
@@ -53,7 +45,6 @@ public class GearInventory : MonoBehaviour
         _playerData = _showCharacterMenuUI.GetPlayerData();
     }
 
-
     private void UnEquip(Gear gear)
     {
         _inventoryBlock.AddGearBlock(gear );
@@ -65,101 +56,35 @@ public class GearInventory : MonoBehaviour
 
     private void Equip(Gear gear)
     {
-        var gearType = gear.EquipmentType;
-        bool gearEquipped = HasGearEquipped(gearType);
-        bool freeSlot = HasFreeSlot(gear);
-    //    Debug.Log($"Gear equipped: {gearEquipped}, Free slot available: {freeSlot}");
-        
-        if (gearEquipped && !freeSlot)
+        bool freeSlot = GetIsFreeSlot(gear);
+        if (freeSlot == false)
         {
-       //     Debug.Log($"No free slot available to equip {gear.name}.");
             UnEquip(gear);
         }
-
-        gear.Equip(_showCharacterMenuUI.GetPlayerData(), _showCharacterMenuUI.GetPlayerCharacteristcs());
-        _inventoryBlock.EquipGear(gear);
-        _playerData.Save();
-        _playerDataManager.Save();
-        EquipAllGear();
-        PrintSlotsInfo();
-    }
-
-    private bool HasFreeSlot(Gear gear)
-    {
-        var gearType = gear.EquipmentType;
-        Debug.Log(gearType);
-        foreach (var slot in _slotsTransforms)
-        {
-            var slotGear = slot.GetComponentInChildren<GearUI>();
-            if (slotGear != null && slotGear.EquipmentType == gearType)
-            {
-                // Слот уже занят нужным типом предмета
-             //   Debug.Log("Slot " + slot.name + " is occupied by " + slotGear.name);
-                return false;
-            }
-            else if (slotGear == null)
-            {
-                // Свободный слот
-           //     Debug.Log("Slot " + slot.name + " is free");
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private bool GetFreeSlot(Gear gear)
-    {
-        foreach (var item in _equipmentSlots)
-        {
-            if(item._equipmentType == gear.EquipmentType)
-            {
-              if(item.IsFreeSlots() == true)
-                {
-                    return true;
-                }
-            }
-        return false;
-    }
-
-    private bool HasGearEquipped(Gear.GearStyle gearType)
-    {
-        foreach (var slot in _gearsEquipOn)
-        {
-            if (slot.EquipmentType == gearType)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void PrintSlotsInfo()
-    {
-        foreach (var slotTransform in _slotsTransforms)
-        {
-            var slotGear = slotTransform.GetComponentInChildren<GearUI>();
-
-            if (slotGear != null)
-            {
-                Debug.Log($"Slot {slotTransform.name} is not free");
-            }
-            else
-            {
-                Debug.Log($"Slot {slotTransform.name} is free");
-            }
-        }
-    }
-
-
-    /*    private void Equip(Gear gear)
-        {
             gear.Equip(_showCharacterMenuUI.GetPlayerData(), _showCharacterMenuUI.GetPlayerCharacteristcs());
             _inventoryBlock.EquipGear(gear);
             _playerData.Save();
             _playerDataManager.Save();
             EquipAllGear();
-        }*/
+    }
 
+    /// <summary>
+    /// возврати правду или ложь если свободен ли слот. 
+    /// правда свободен ложь не свободен
+    /// </summary>
+    /// <param name="gear"></param>
+    /// <returns></returns>
+    private bool  GetIsFreeSlot(Gear gear)
+    {
+        foreach (GameObject equipped in _equippedGears)
+        {
+           if(equipped.GetComponent<GearUI>().EquipmentType == gear.EquipmentType)
+            {
+                return false;
+            } 
+        }
+        return true;
+    }
 
 
     /// <summary>
@@ -175,13 +100,9 @@ public class GearInventory : MonoBehaviour
         _equippedGears.Clear();
 
     }
-
-
-    /// <summary>
-    /// При открытии инвенторя надевай всю одежду которая есть уже у персонажа.
-    /// </summary>
     public void EquipAllGear()
     {
+        Debug.Log("1");  гдето здесь надо смотреть почему шлем два раза одевается 
         // Удаляем все созданные экземпляры
         foreach (GameObject gearUI in _equippedGears)
         {
@@ -196,17 +117,17 @@ public class GearInventory : MonoBehaviour
             Gear gear = CreateGearInstance(gearData);
             if (gear != null)
             {
-                for (int i = 0; i < _gearsEquipOn.Length; i++)
+                for (int i = 0; i < _allGears.Length; i++)
                 {
-                    if (_gearsEquipOn[i].EquipmentType == gear.EquipmentType)
+                    if (_allGears[i].Name == gear.Name)
                     {
                         for (int j = 0; j < _slotsTransform.Length; j++)
                         {
                             if (_slotsTransform[j].EquipmentType == gear.EquipmentType)
                             {
-                                gear.SpriteCharackteristic = _gearsEquipOn[i].SpriteCharackteristic;
+                                gear.SpriteCharackteristic = _allGears[i].SpriteCharackteristic;
                                 GameObject gearUI = Instantiate(_gearUIPrefab, _slotsTransform[j].SlotTransform);  // создаем префаб
-                                gearUI.GetComponent<GearUI>().ShowGear(_gearsEquipOn[i]);
+                                gearUI.GetComponent<GearUI>().ShowGear(_allGears[i]);
                                 gearUI.GetComponent<GearUI>().IsEquipped = true;
                                 _equippedGears.Add(gearUI);
                                 ShowDataCharacter();
@@ -218,11 +139,6 @@ public class GearInventory : MonoBehaviour
             }
         }
     }
-
-
-
-
-
 
 
     /// <summary>

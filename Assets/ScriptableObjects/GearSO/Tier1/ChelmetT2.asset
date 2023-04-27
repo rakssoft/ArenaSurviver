@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 022ab5e34d23b674baa54f9b34a95381, type: 3}
-  m_Name: ChelmetT1
+  m_Name: ChelmetT2
   m_EditorClassIdentifier: 
-  Name: ChelmetT1
+  Name: ChelmetT2
   TierGear: 1
   Sprite: {fileID: 21300000, guid: c99916ecbc203534099e6669e6d82fd4, type: 3}
   SpriteCharackteristic: {fileID: 21300040, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  Value: 10
+  Value: 20
   EquipmentType: 0
   Price: 80

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerData:
     speed: 10
-    baseAttack: 5
-    health: 170
+    baseAttack: 10
+    health: 290
     coins: 0
     playerName: Alisa
     gearList: []
