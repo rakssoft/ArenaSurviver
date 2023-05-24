@@ -4,35 +4,48 @@ using UnityEngine;
 
 public class ManagerSpawnEnemy : MonoBehaviour
 {
-    [SerializeField] private Enemy[] _enemyPrefabs;
+    [SerializeField] private CharacteristicsEnemy [] _enemyPrefabs;
     [SerializeField] private GameObject[] _pointsSpawn;
     [SerializeField] private Transform _parentEnemy;
     [SerializeField] private float _timerSpawn;
     [SerializeField] private int _waveEnemy;
+    [SerializeField] private bool _isBossScene;
     private float _timer;
 
     private void Start()
     {
-        _waveEnemy = 1;
         _timer = _timerSpawn;
-    }
-
-    private void Update()
-    {
-        _timer -= Time.deltaTime;
-        if(_timer <= 0)
+        if (_isBossScene)
         {
-            _timer = _timerSpawn;
-            _waveEnemy++;
+            Instantiate(_enemyPrefabs[0], _pointsSpawn[RandomPoint()].transform.position, Quaternion.identity, _parentEnemy);
+        }
+        else
+        {
             SpawnEnemy(_waveEnemy);
         }
     }
 
+    private void Update()
+    {
+        if (!_isBossScene)
+        {
+            _timer -= Time.deltaTime;
+            if (_timer <= 0)
+            {
+                _timer = _timerSpawn;
+                _waveEnemy++;
+                SpawnEnemy(_waveEnemy);
+            }
+        }
+    }
+
+
 
     private void SpawnEnemy(int wave)
     {
-        for (int i = 0; i < _waveEnemy * 3; i++)
+        for (int i = 0; i < _waveEnemy * 2; i++)
         {
+
             Instantiate(_enemyPrefabs[RandomEnemy()], _pointsSpawn[RandomPoint()].transform.position, Quaternion.identity, _parentEnemy);
             EventManager.CurrentCountEnemy?.Invoke(1);
         }

@@ -17,10 +17,11 @@ public class GearInventory : MonoBehaviour
     [SerializeField] private GameObject _gearUIPrefab;
     [SerializeField] private GearStyle[] _slotsTransform;
     [SerializeField] private ShowCharacterMenuUI _showCharacterMenuUI;
-    [SerializeField] private PlayerData _playerData;
-    [SerializeField] private PlayerDataManager _playerDataManager;
+    [SerializeField] private CharacterData _characterData;
+    [SerializeField] private CharacterDataManager _characterDataManager;
     [SerializeField] private List<GameObject> _equippedGears = new List<GameObject>();
     [SerializeField] private InventoryBlock _inventoryBlock;
+    [SerializeField] private EquipmentSlot[] _equipmentSlots;
 
 
     private void OnEnable()
@@ -37,36 +38,63 @@ public class GearInventory : MonoBehaviour
     {
         _inventoryBlock.ShowAllEquips();
         ShowDataCharacter();
-        _playerData = _showCharacterMenuUI.GetPlayerData();
+        _characterData = _showCharacterMenuUI.GetPlayerData();
     }
 
     public void ShowDataCharacter()
     {
-        _playerData = _showCharacterMenuUI.GetPlayerData();
+        _characterData = _showCharacterMenuUI.GetPlayerData();
     }
 
     private void UnEquip(Gear gear)
     {
-        _inventoryBlock.AddGearBlock(gear );
+        _inventoryBlock.AddGearBlock(gear);
         gear.UnEquip(_showCharacterMenuUI.GetPlayerData(), _showCharacterMenuUI.GetPlayerCharacteristcs());
-        _playerData.Save();
-        _playerDataManager.Save();
+        _characterData.Save();
+        _characterDataManager.Save();
         EquipAllGear();
     }
 
     private void Equip(Gear gear)
     {
-        bool freeSlot = GetIsFreeSlot(gear);
-        if (freeSlot == false)
-        {
-            UnEquip(gear);
-        }
+        // bool freeSlot = GetIsFreeSlot(gear);
+        Gear freeSlot = GetFreeSlot(gear);
+     //   Debug.Log(freeSlot);
+        if (freeSlot != null)
+        {               
+            UnEquip(freeSlot);
             gear.Equip(_showCharacterMenuUI.GetPlayerData(), _showCharacterMenuUI.GetPlayerCharacteristcs());
             _inventoryBlock.EquipGear(gear);
-            _playerData.Save();
-            _playerDataManager.Save();
+            _characterData.Save();
+            _characterDataManager.Save();
             EquipAllGear();
+
+        }
+        else if (freeSlot == null)
+        {
+            gear.Equip(_showCharacterMenuUI.GetPlayerData(), _showCharacterMenuUI.GetPlayerCharacteristcs());
+            _inventoryBlock.EquipGear(gear);
+            _characterData.Save();
+            _characterDataManager.Save();
+            EquipAllGear();
+        }
     }
+
+    private Gear GetFreeSlot(Gear gear)
+    {
+        for (int i = 0; i < _equipmentSlots.Length; i++)
+        {
+            if (_equipmentSlots[i]._equipmentType == gear.EquipmentType && _equipmentSlots[i].IsFreeSlots() == false)
+            {             
+                //подходит по типу но слот не свободен а чем то зан€т.  
+                //возвращает то чем зан€т слот.
+                return _equipmentSlots[i].GearSlot;
+            }
+        }
+
+        return null;
+    }
+
 
     /// <summary>
     /// возврати правду или ложь если свободен ли слот. 
@@ -76,14 +104,14 @@ public class GearInventory : MonoBehaviour
     /// <returns></returns>
     private bool  GetIsFreeSlot(Gear gear)
     {
-        foreach (GameObject equipped in _equippedGears)
+        for (int i = 0; i < _equippedGears.Count; i++)
         {
-           if(equipped.GetComponent<GearUI>().EquipmentType == gear.EquipmentType)
+            if (_equippedGears[i].GetComponent<GearUI>().EquipmentType == gear.EquipmentType)
             {
                 return false;
-            } 
+            }
         }
-        return true;
+        return true; 
     }
 
 
@@ -101,8 +129,7 @@ public class GearInventory : MonoBehaviour
 
     }
     public void EquipAllGear()
-    {
-        Debug.Log("1");  гдето здесь надо смотреть почему шлем два раза одеваетс€ 
+    {      
         // ”дал€ем все созданные экземпл€ры
         foreach (GameObject gearUI in _equippedGears)
         {
@@ -111,7 +138,7 @@ public class GearInventory : MonoBehaviour
         _equippedGears.Clear();
 
         // —оздаем экземпл€ры заново дл€ каждого надеваемого предмета
-        List<GearData> tempList = new List<GearData>(_playerData.gearList);
+        List<GearData> tempList = new List<GearData>(_characterData.gearList);
         foreach (GearData gearData in tempList)
         {
             Gear gear = CreateGearInstance(gearData);
@@ -156,12 +183,13 @@ public class GearInventory : MonoBehaviour
                 return new ChestGearSO(gearData);
             case Gear.GearStyle.foot:
                 return new FootGearSO(gearData);
-  /*          case Gear.GearStyle.beads:
-                return new BeadsGear(gearData);
-            case Gear.GearStyle.amulet:
-                return new AmuletGear(gearData);
-            case Gear.GearStyle.belt:
-                return new BeltGear(gearData);*/
+            case Gear.GearStyle.weapon:
+                return new WeaponGearSO(gearData);
+            /*          case Gear.GearStyle.beads:
+                          return new BeadsGear(gearData);
+
+                      case Gear.GearStyle.belt:
+                          return new BeltGear(gearData);*/
             default:
            //     Debug.LogError($"Unsupported gear type {gearData.equipmentType}");
                 return null;

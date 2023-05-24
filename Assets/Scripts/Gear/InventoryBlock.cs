@@ -13,8 +13,9 @@ public class InventoryBlock : MonoBehaviour
 
     public void ShowAllEquips()
     {
-        
+       
         _inventoryData.Load();
+      //  CloseInventory();
         _allEquips.Clear();
         _allEquips.AddRange(_inventoryData.gearList); // копирование всех элементов из _inventoryData.gearList в _allEquips
         while (_allEquips.Count > 0)

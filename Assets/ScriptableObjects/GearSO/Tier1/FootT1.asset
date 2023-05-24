@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036d5e130034c01459bce5b61820c57b, type: 3}
   m_Name: FootT1
   m_EditorClassIdentifier: 
-  Name: Foot
+  Name: FootT1
   TierGear: 1
   Sprite: {fileID: 21300000, guid: dc32764b6d7615c408f2d50d6c532c9f, type: 3}
   SpriteCharackteristic: {fileID: 21300048, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  Value: 10
+  Value: 1
   EquipmentType: 2
-  Price: 2000
+  Price: 50

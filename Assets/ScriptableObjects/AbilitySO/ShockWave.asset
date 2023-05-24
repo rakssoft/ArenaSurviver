@@ -19,7 +19,8 @@ MonoBehaviour:
   Duration: 5
   Level: 0
   state: 1
-  activeTime: 3.4099836
-  cooldownTime: -0.03469703
-  _baseDamage: 10
-  _shockWavePrefab: {fileID: 5738667364211373684, guid: 9074cfacc66aafb42b13c80c51fc1447, type: 3}
+  activeTime: 4.2321863
+  cooldownTime: -0.008253681
+  _baseDamage: 5
+  _shockWavePrefab: {fileID: 5738667364211373684, guid: 60b0149acdbbdb14d90b22a161838be9, type: 3}
+  _currentLevel: 0

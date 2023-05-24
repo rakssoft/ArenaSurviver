@@ -13,6 +13,8 @@ public class GearUI : MonoBehaviour
     public bool IsEquipped;
     public Gear.GearStyle EquipmentType { get; private set; }
 
+    public Gear GearSlot { get; private set; }
+
 
     private void Start()
     {
@@ -38,6 +40,7 @@ public class GearUI : MonoBehaviour
     public void ShowGear(Gear gear)
     {
         _gear = gear;
+        GearSlot = _gear;
         _spriteGear.sprite = _gear.Sprite;      
         _valueCharacteristic.text = _gear.Value.ToString();
         EquipmentType = _gear.EquipmentType;

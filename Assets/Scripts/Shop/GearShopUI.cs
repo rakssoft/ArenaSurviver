@@ -27,8 +27,15 @@ public class GearShopUI : MonoBehaviour
 
     public void BuyEquip()
     {
-        EventManager.PurchaseCompleted?.Invoke(_gear);
-        Destroy(gameObject);
+        float coinCount = Wallet.Instance.coins;
+  
+        if (coinCount >= _gear.Price)
+        {
+            Wallet.Instance.RemoveCoins(_gear.Price);
+            EventManager.PurchaseGearCompleted?.Invoke(_gear);
+            Destroy(gameObject);
+        }
+       
     }
 
 

@@ -18,13 +18,13 @@ public abstract class Gear : ScriptableObject
         chest = 1,
         foot = 2,
         beads = 3,
-        amulet = 4,
+        weapon = 4,
         belt = 5,
         None = 6
     }
 
-    public abstract void Equip(PlayerData player, PlayerCharacteristics character);
-    public abstract void UnEquip(PlayerData player, PlayerCharacteristics character);
+    public abstract void Equip(CharacterData player, CharacterCharacteristics character);
+    public abstract void UnEquip(CharacterData player, CharacterCharacteristics character);
 
     private void OnEnable()
     {

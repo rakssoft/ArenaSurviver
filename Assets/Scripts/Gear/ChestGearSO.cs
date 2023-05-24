@@ -15,18 +15,18 @@ public class ChestGearSO : Gear
         Sprite = Resources.Load<Sprite>("ChestGearSprite"); // пример, как загрузить спрайт
     }
 
-    public override void Equip(PlayerData playerData, PlayerCharacteristics character)
+    public override void Equip(CharacterData characterData, CharacterCharacteristics character)
     {
 
-        playerData.AddGear(new GearData(Gear.GearStyle.chest, Name, Value, Sprite.name, InstanceID));
-        playerData.IncreaseMaxHealth(Value);
-        character.SetPlayerData(playerData);
+        characterData.AddGear(new GearData(Gear.GearStyle.chest, Name, Value, Sprite.name, InstanceID));
+        characterData.IncreaseMaxHealth(Value);
+        character.SetPlayerData(characterData);
     }
 
-    public override void UnEquip(PlayerData playerData, PlayerCharacteristics character)
+    public override void UnEquip(CharacterData characterData, CharacterCharacteristics character)
     {
         GearData gearToRemove = null;
-        foreach (GearData gear in playerData.gearList)
+        foreach (GearData gear in characterData.gearList)
         {
             if (gear.name == Name)
             {
@@ -37,9 +37,9 @@ public class ChestGearSO : Gear
 
         if (gearToRemove != null)
         {
-            playerData.RemoveGear(gearToRemove);
-            playerData.IncreaseMaxHealth(Value * -1);
-            character.SetPlayerData(playerData);
+            characterData.RemoveGear(gearToRemove);
+            characterData.IncreaseMaxHealth(Value * -1);
+            character.SetPlayerData(characterData);
       //      Debug.Log("Gear unequipped: " + gearToRemove.name);
         }
         else

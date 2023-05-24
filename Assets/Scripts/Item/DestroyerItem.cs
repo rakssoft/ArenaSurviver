@@ -22,13 +22,13 @@ public class ItemDestroyer : MonoBehaviour
     public float RadiusCollision;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerCharacteristics player))
+        if (other.gameObject.CompareTag("Player"))
         {
             Collider[] colliders = Physics.OverlapSphere(gameObject.transform.position, RadiusCollision);
             foreach (Collider collider in colliders)
             {
 
-                if (collider.TryGetComponent(out Enemy enemy))
+                if (collider.TryGetComponent(out HealthEnemy enemy))
                 {
                     enemy.TakeDamage(ValueCollision);
                 }

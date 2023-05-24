@@ -9,26 +9,29 @@ public class ShowCharacterMenuUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _damage;
     [SerializeField] private TextMeshProUGUI _speed;
     [SerializeField] private TextMeshProUGUI _name;
-    [SerializeField] private PlayerManager _playerManager;    
-    [SerializeField] private  List<PlayerCharacteristics>  _playersCharacteristics = new List<PlayerCharacteristics>();
+    [SerializeField] private TextMeshProUGUI _level;
+    [SerializeField] private Image _experienceBar;
+    [SerializeField] private CharacterManager _characterManager;    
+    [SerializeField] private  List<CharacterCharacteristics>  _characterCharacteristics = new List<CharacterCharacteristics>();
     [SerializeField] private GameObject _spawnPositionCharacter;
-    [SerializeField] private PlayerDataManager playerDataManager;
-    private PlayerCharacteristics _character;
+    [SerializeField] private CharacterDataManager _characterDataManager;
+    [SerializeField] private float _upgradeCharacterPrice;
+    private CharacterCharacteristics _character;
     private GameObject characterObject;
-    public PlayerData _playerData;
-
     private int _characterChooseActive;
+    private CharacterData _characterData;
 
     private void OnEnable()
     {
-        EventManager.AddPlayerCharacteristics += AddCharactersInChoose;
+        EventManager.AddCharacterCharacteristics += AddCharactersInChoose;
     }
     private void OnDisable()
     {
-        EventManager.AddPlayerCharacteristics -= AddCharactersInChoose;
+        EventManager.AddCharacterCharacteristics -= AddCharactersInChoose;
     }
 
     private void Start()
+
     {
         if (!PlayerPrefs.HasKey("activeCharacter"))
         {
@@ -38,6 +41,11 @@ public class ShowCharacterMenuUI : MonoBehaviour
         {
             _characterChooseActive = PlayerPrefs.GetInt("activeCharacter");
         }
+        if (!PlayerPrefs.HasKey("activeCharacterName"))
+        {         
+            PlayerPrefs.SetString("activeCharacterName", GetPlayerData().playerName);
+        }
+       
     }
     public void ShowCharackers()
     {
@@ -53,39 +61,50 @@ public class ShowCharacterMenuUI : MonoBehaviour
     }
 
     public void ChooseCharacter(int index)
-    {    
-        _characterChooseActive += index;
-        if(_characterChooseActive < 0)
+    {
+        if (_characterCharacteristics.Count == 1)
         {
-            _characterChooseActive = _playersCharacteristics.Count -1;
+            _characterChooseActive = 0;
+            return;
+        }
+
+        _characterChooseActive += index;
+
+        if (_characterChooseActive < 0)
+        {
+            _characterChooseActive = _characterCharacteristics.Count - 1;
             PlayerPrefs.SetInt("activeCharacter", _characterChooseActive);
         }
-        if(_characterChooseActive > _playersCharacteristics.Count - 1)
+
+        if (_characterChooseActive > _characterCharacteristics.Count - 1)
         {
             _characterChooseActive = 0;
             PlayerPrefs.SetInt("activeCharacter", _characterChooseActive);
         }
+
         PlayerPrefs.SetInt("activeCharacter", _characterChooseActive);
+        PlayerPrefs.SetString("activeCharacterName", GetPlayerData().playerName);
         GetPlayerData();
         ShowUI(GetActiveCharacter());
     }
-    
-    public void AddCharactersInChoose(PlayerCharacteristics playerCharacteristics)
+
+
+    public void AddCharactersInChoose(CharacterCharacteristics characterCharacteristics)
     {
-        _playersCharacteristics.Add(playerCharacteristics);
+        _characterCharacteristics.Add(characterCharacteristics);
     }
     private int GetActiveCharacter()
     {
         return PlayerPrefs.GetInt("activeCharacter");
     }
-    public PlayerData GetPlayerData()
+    public CharacterData GetPlayerData()
     {
-        _playerData = playerDataManager.GetPlayerData(_playersCharacteristics[GetActiveCharacter()].Name);
-        return _playerData;
+        _characterData = _characterDataManager.GetPlayerData(_characterCharacteristics[GetActiveCharacter()].Name);
+        return _characterData;
     }
-    public PlayerCharacteristics GetPlayerCharacteristcs()
+    public CharacterCharacteristics GetPlayerCharacteristcs()
     {
-        _character = _playersCharacteristics[GetActiveCharacter()];
+        _character = _characterCharacteristics[GetActiveCharacter()];
         return _character;
     }
 
@@ -96,11 +115,24 @@ public class ShowCharacterMenuUI : MonoBehaviour
     private void ShowUI(int indexPlayers)
     {
         CloseShowUI();
-        _name.text = _playersCharacteristics[indexPlayers].Name.ToString();
-        _health.text = _playersCharacteristics[indexPlayers].MaxHealth.ToString("F0");
-        _damage.text = _playersCharacteristics[indexPlayers].BaseAttack.ToString("F0");
-        _speed.text = _playersCharacteristics[indexPlayers].Speed.ToString("F0");
-        _character = _playersCharacteristics[indexPlayers];
+        _name.text = _characterCharacteristics[indexPlayers].Name.ToString();
+        _health.text = _characterCharacteristics[indexPlayers].MaxHealth.ToString("F0");
+        _damage.text = _characterCharacteristics[indexPlayers].BaseAttack.ToString("F0");
+        _speed.text = _characterCharacteristics[indexPlayers].Speed.ToString("F0");
+        _level.text = _characterCharacteristics[indexPlayers].Level.ToString();
+
+        float currentExperience = _characterCharacteristics[indexPlayers].Experience;
+        float experienceNeeded = _characterCharacteristics[indexPlayers].ExperienceNeededForLevel;
+
+        float fillAmount = currentExperience / experienceNeeded;
+        if (fillAmount >= 1f) // Если fillAmount превышает 1, установим его равным 1
+        {
+            fillAmount = 0f;
+        }
+
+        _experienceBar.fillAmount = fillAmount;
+
+        _character = _characterCharacteristics[indexPlayers]; 
         Vector3 direction = Camera.main.transform.position - _spawnPositionCharacter.transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
         characterObject = Instantiate(_character.PrefabCharacter, _spawnPositionCharacter.transform.position, rotation);
@@ -109,16 +141,24 @@ public class ShowCharacterMenuUI : MonoBehaviour
     /// <summary>
     /// Тестовая функци для пробы апгрейда персонажа. На нее можно будет что то сделать
     /// </summary>
-    /*    public void Upgrade()
+    public void Upgrade()
+    {
+        float coinCount = Wallet.Instance.coins;
+
+        if (coinCount >= _upgradeCharacterPrice)
         {
+            Wallet.Instance.RemoveCoins(_upgradeCharacterPrice);
             CloseShowUI();
-            PlayerCharacteristics player = GetPlayerCharacteristcs();
-            _playerManager.Upgrade(5,5,5,5, player);
+            CharacterCharacteristics character = GetPlayerCharacteristcs();
+            _characterManager.Upgrade(character, 5);
             ShowUI(GetActiveCharacter());
-
-        }*/
-
-
+            EventManager.PurchaseIsCompleted?.Invoke();
+        }
+        else
+        {
+            Debug.Log("no money upgrade character");
+        }
+    }
 
 
 

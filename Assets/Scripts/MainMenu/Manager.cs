@@ -10,6 +10,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private AudioSource _soundSource;
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _losePanel;
+    [SerializeField] private CharacterData characterData;
 
 
     private void OnEnable()
@@ -23,6 +24,9 @@ public class Manager : MonoBehaviour
     }
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
+
         if (_winPanel)
         _winPanel.SetActive(false);
         if(_losePanel)
@@ -85,6 +89,8 @@ public class Manager : MonoBehaviour
         Time.timeScale = 0;
         if (isWin == true)
         {
+            // добавить 50 монет за победу
+            Wallet.Instance.AddCoins(50);
             _winPanel.SetActive(true);
         }
         else

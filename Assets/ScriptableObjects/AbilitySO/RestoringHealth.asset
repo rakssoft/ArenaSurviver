@@ -19,8 +19,8 @@ MonoBehaviour:
   Duration: 5
   Level: 0
   state: 1
-  activeTime: 0.66254526
-  cooldownTime: -0.0035165139
-  _baseRestoringHealth: 1
-  _currentRestoringHealth: 0
+  activeTime: 0.92306614
+  cooldownTime: -0.024119347
+  _baseRestoringHealth: 5
   _restoringHealth: {fileID: 6123496984629303113, guid: b1d8bb88830757841a64fd27dbfd598c, type: 3}
+  _currentLevel: 2

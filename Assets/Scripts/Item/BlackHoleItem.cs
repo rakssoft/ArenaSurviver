@@ -20,9 +20,9 @@ public class ItemBlackHole : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerMove playerCharacteristics))
+        if (other.gameObject.CompareTag("Player"))
         {
-            player = playerCharacteristics.gameObject;
+            player = other.gameObject;
             ItemMove[] itemMove = FindObjectsOfType<ItemMove>();
             foreach (ItemMove obj in itemMove)
             {

@@ -18,12 +18,12 @@ MonoBehaviour:
   Cooldown: 5
   Duration: 5
   Level: 0
-  state: 2
-  activeTime: -0.0012801148
-  cooldownTime: 2.3448913
-  baseDamage: 20
-  basePenetrationAbility: 1
-  _currentLevelAbility: 0
+  state: 1
+  activeTime: 0.58014756
+  cooldownTime: -0.005660083
+  _baseDamage: 10
+  _basePenetration: 0
+  _currentLevel: 1
   currentRotationSpeed: 360
   currentRotationDistance: 5
   fireballPrefab: {fileID: 2582405692084614984, guid: 5740a3a0bfa9c12419e68ff0aea2c8a0, type: 3}

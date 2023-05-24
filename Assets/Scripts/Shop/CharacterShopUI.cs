@@ -9,23 +9,36 @@ public class CharacterShopUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private Image _avatar;
     [SerializeField] private TextMeshProUGUI _cost;
-    private PlayerCharacteristics _playerCharacteristics;
+    [SerializeField] private CharacterDataManager _characterDataManager;
+    private CharacterCharacteristics _characterCharacteristics;
     
-    public void ShowCharacter(PlayerCharacteristics playerCharacteristics)
+    public void ShowCharacter(CharacterCharacteristics characterCharacteristics)
     {
-        _playerCharacteristics = playerCharacteristics;
-        _name.text = _playerCharacteristics.Name.ToUpper().ToString();
-        _avatar.sprite = _playerCharacteristics.Avatar;
-        _cost.text = _playerCharacteristics.Cost.ToString("F0");
+        _characterCharacteristics = characterCharacteristics;
+        _name.text = _characterCharacteristics.Name.ToUpper().ToString();
+        _avatar.sprite = _characterCharacteristics.Avatar;
+        _cost.text = _characterCharacteristics.Cost.ToString("F0");
     }
 
 
     public void Purchase()
     {
-        _playerCharacteristics.Unlock();
-        EventManager.AddPlayerCharacteristics?.Invoke(_playerCharacteristics);
-        Destroy(gameObject);
+        float coinCount = Wallet.Instance.coins;
+
+        if (coinCount >= _characterCharacteristics.Cost)
+        {
+            Wallet.Instance.RemoveCoins(_characterCharacteristics.Cost);
+            _characterCharacteristics.Unlock();
+            // —охран€ем данные после разблокировки персонажа
+
+            EventManager.AddCharacterCharacteristics?.Invoke(_characterCharacteristics);
+            EventManager.PurchaseIsCompleted?.Invoke();
+            CharacterDataManager.Instance.Save();
+            Destroy(gameObject);
+        }
     }
+
+
 
 
 

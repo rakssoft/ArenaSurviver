@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ShopCharacters : MonoBehaviour
 {
-    [SerializeField] private PlayerCharacteristics[] _playerCharacteristics;
-    [SerializeField] private List<PlayerCharacteristics> _listShopCharacters = new List<PlayerCharacteristics>();
+    [SerializeField] private CharacterCharacteristics[] _characterCharacteristics;
+    [SerializeField] private List<CharacterCharacteristics> _listShopCharacters = new List<CharacterCharacteristics>();
     [SerializeField] private ShowCharacterMenuUI _showCharacter;
     [SerializeField] private Transform _shopTransform;
     [SerializeField] private CharacterShopUI _prefabCharacterShopUI;
@@ -13,14 +13,14 @@ public class ShopCharacters : MonoBehaviour
     private bool _unLocked;
 
 
-    public void Awake()
+    public void Start()
     {
         OpenShopCharacters();
     }
     public void OpenShopCharacters()
     {
         _listShopCharacters.Clear();
-        foreach (var character in _playerCharacteristics)
+        foreach (var character in _characterCharacteristics)
         {
             if(IsUnlookCharacter(character) == true)
             {
@@ -44,9 +44,9 @@ public class ShopCharacters : MonoBehaviour
         }
     }
 
-    private bool IsUnlookCharacter(PlayerCharacteristics character)
+    private bool IsUnlookCharacter(CharacterCharacteristics character)
     {
-        if (character.Unlocked)
+        if (character.Unlocked == true)
         {
             _unLocked = true;
         }

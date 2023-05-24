@@ -1,112 +1,80 @@
 using UnityEngine;
-using System;
-using System.Collections.Generic;
 
 [System.Serializable]
 public class PlayerData
 {
-    // ƒобавл€ем новый параметр дл€ загрузки данных из сохранени€
-    public PlayerData(float speed, float baseAttack, float health, int coins, string playerName, bool useSavedData)
+    private static PlayerData instance = null;
+    public static PlayerData Instance
     {
-        if (useSavedData)
+        get
         {
-            Load();
+            if (instance == null)
+            {
+                instance = new PlayerData();
+                instance.Load();
+            }
+            return instance;
         }
-        else
-        {
-            this.speed = speed;
-            this.baseAttack = baseAttack;
-            this.health = health;
-            this.coins = coins;
-            this.playerName = playerName;
-            this.gearList = new List<GearData>();
-        }
-    
-
-        this.playerName = playerName;
-        this.gearList = new List<GearData>();
     }
 
-    public float speed;
-    public float baseAttack;
-    public float health;
-    public int coins;
-    public string playerName;
-    public List<GearData> gearList; // —писок одежды
+    public int Level;
+    public float Experience;
 
-
-    public void AddGear(GearData gear)
+    private PlayerData()
     {
-        gearList.Add(gear);
-
+        Level = 1;
+        Experience = 0.0f;
     }
 
-
-    public void RemoveGear(GearData gear)
+    public void AddExperience(float amount)
     {
-        gearList.Remove(gear);
+        Experience += amount;
+        CheckLevelUp();
         Save();
     }
 
-    public void Load()
+    private void CheckLevelUp()
     {
-        string fileName = playerName + ".json";
-        string path = Application.persistentDataPath + "/" + fileName;
-
-   //     string path = Application.dataPath + "/Data/" + playerName + ".json";
-        if (System.IO.File.Exists(path))
+        int experienceNeeded = GetExperienceNeededForLevel(Level );
+        if (Experience >= experienceNeeded)
         {
-            string json = System.IO.File.ReadAllText(path);
-            PlayerData savedData = JsonUtility.FromJson<PlayerData>(json);
-            if (savedData != null)
-            {
-                speed = savedData.speed;
-                baseAttack = savedData.baseAttack;
-                health = savedData.health;
-                coins = savedData.coins;
-                gearList = savedData.gearList;       
-            }
-            else
-            {
-                Debug.Log("Failed to load player data from file: " + playerName);
-            }
-        }
-        else
-        {
-            Debug.Log("No save file found for player " + playerName);
+            Level++;
+            Experience -= experienceNeeded; // —охран€ем оставшийс€ опыт
+            CheckLevelUp(); // –екурсивно провер€ем возможность повышени€ еще одного уровн€
         }
     }
 
-
+    public int GetExperienceNeededForLevel(int level)
+    {
+        //  аждый новый уровень требует собрать на 10 опыта больше, чем предыдущий
+        return level * 10;
+    }
 
 
     public void Save()
     {
-        string path = Application.persistentDataPath + "/" + playerName + ".json";
-              
-        //  string path = Application.dataPath + "/Data/" + playerName + ".json";
         string json = JsonUtility.ToJson(this);
-        System.IO.File.WriteAllText(path, json);
+        PlayerPrefs.SetString("playerData", json);
     }
 
-    public void IncreaseMaxHealth(float amount)
+    public void Load()
     {
-        health += amount;
+        if (PlayerPrefs.HasKey("playerData"))
+        {
+            string json = PlayerPrefs.GetString("playerData");
+            PlayerData savedPlayerData = JsonUtility.FromJson<PlayerData>(json);
+            Level = savedPlayerData.Level;
+            Experience = savedPlayerData.Experience;
+        }
     }
 
-    public void IncreaseBaseAttack(float amount)
+    public int GetCurrentLevel()
     {
-        baseAttack += amount;
+        return Level;
     }
 
-    public void IncreaseSpeed(float amount)
+    public float GetCurrentExperience()
     {
-        speed += amount;
+        return Experience;
     }
-
-    public void DecreaseCoins(int amount)
-    {
-        coins -= amount;
-    }
-
 }

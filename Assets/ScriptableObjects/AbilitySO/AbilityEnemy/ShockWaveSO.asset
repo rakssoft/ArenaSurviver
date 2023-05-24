@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e998971aca331bc4fb0210110de092e2, type: 3}
+  m_Name: ShockWaveSO
+  m_EditorClassIdentifier: 
+  AbilityName: ShockWave
+  "\u0421hargingTimer": 1
+  DistanceAttack: 13
+  _prefabShockWave: {fileID: 5738667364211373684, guid: 9074cfacc66aafb42b13c80c51fc1447, type: 3}
+  _damage: 10
+  _forceMove: 0.1
+  _timerForFalse: 2
+  _shockForce: 10
+  _aoePrefab: {fileID: 5989770862190058538, guid: 399f75659289d4d428d4253ca83e9780, type: 3}
