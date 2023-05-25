@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     {
         OffPanel();
         _listPanels[indexPanel].SetActive(true);
-        if(indexPanel <= _activeButtonsPanel.Length)
+        if (indexPanel < _activeButtonsPanel.Length)
         {
             _activeButtonsPanel[indexPanel].SetActive(true);
         }
