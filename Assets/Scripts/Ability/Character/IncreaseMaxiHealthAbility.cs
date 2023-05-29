@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Ability", menuName = "Abilities/IncreaseMaxiHealth")]
 public class IncreaseMaxiHealthAbility : Ability
 {
+    [SerializeField] private int _currentLevel;
     [SerializeField] private int _baseIncreaseHealth;
     private int _currentIncreaseHealth;
 
@@ -25,5 +26,9 @@ public class IncreaseMaxiHealthAbility : Ability
     public override void EnableAbility(float Damage)
     {
         _currentIncreaseHealth = _baseIncreaseHealth;
+    }
+    public override int GetCurrentStatsAbility()
+    {
+        return _currentLevel;
     }
 }

@@ -5,7 +5,7 @@ public class AbilityBattleUI : MonoBehaviour
 {
     [SerializeField] private string _abilityName;
     [SerializeField] private Image _imageAbility;
-    private Ability _ability;
+    [SerializeField] private Ability _ability;
 
     public void ShowAbilityUI(Sprite icon, Ability ability)
     {

@@ -12,20 +12,25 @@ public class FireballAbility : Ability
 
     private float _currentDamage;
     private int _currentPenetration;
-  
 
+
+    private void OnEnable()
+    {
+        _currentLevel = Level;
+    }
     public override void Activate(GameObject parent)
     {
         GameObject fireball = Instantiate(fireballPrefab, parent.transform.position + parent.transform.forward * 2, parent.transform.rotation);
         FireballCollisionHandler collisionHandler = fireball.AddComponent<FireballCollisionHandler>();
-        collisionHandler.damage = _currentDamage;
-        collisionHandler._bulletPenetrationAbility = _currentPenetration;
+        collisionHandler.Damage = _currentDamage;
+        collisionHandler.BulletPenetrationAbility = _currentPenetration;
+        collisionHandler.Ability = this;
         Destroy(fireball, Duration);
 
         FireballRotationHandler rotationHandler = fireball.AddComponent<FireballRotationHandler>();
-        rotationHandler.parent = parent.transform;
-        rotationHandler.rotationSpeed = currentRotationSpeed;
-        rotationHandler.distance = currentRotationDistance;
+        rotationHandler.Parent = parent.transform;
+        rotationHandler.RotationSpeed = currentRotationSpeed;
+        rotationHandler.Ddistance = currentRotationDistance;
     }
 
     public override void LevelUp()
@@ -37,9 +42,14 @@ public class FireballAbility : Ability
     }
     public override void EnableAbility(float Damage)
     {
-        _currentLevel = 1;
+      
         _currentPenetration = _basePenetration;
         _currentDamage = Damage + _baseDamage;
+    }
+
+    public override int GetCurrentStatsAbility()
+    {
+        return _currentLevel;
     }
 }
 
@@ -47,18 +57,19 @@ public class FireballAbility : Ability
 
 public class FireballCollisionHandler : MonoBehaviour
 {
-    public float damage;
-    public int _bulletPenetrationAbility;
-
+    public float Damage;
+    public int BulletPenetrationAbility;
+    public Ability Ability;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out HealthEnemy enemy))
         {
-            enemy.TakeDamage(damage);
-            _bulletPenetrationAbility--;
-            if (_bulletPenetrationAbility <= 0)
+            enemy.TakeDamage(Damage);
+            BulletPenetrationAbility--;
+            if (BulletPenetrationAbility <= 0)
             {
+                Ability.activeTime = 0;
                 Destroy(gameObject);
                 //  gameObject.SetActive(false);
             }
@@ -69,22 +80,22 @@ public class FireballCollisionHandler : MonoBehaviour
 
 public class FireballRotationHandler : MonoBehaviour
 {
-    public Transform parent;
-    public float rotationSpeed;
-    public float distance;
-    public float offsetX;
+    public Transform Parent;
+    public float RotationSpeed;
+    public float Ddistance;
+    public float OffsetX;
 
     private Vector3 targetPosition;
 
     private void Start()
     {
-        targetPosition = parent.position + new Vector3(distance + offsetX, 0f, 0f);
+        targetPosition = Parent.position + new Vector3(Ddistance + OffsetX, 0f, 0f);
     }
 
     private void Update()
     {
-        transform.position = parent.position + Quaternion.Euler(0f, rotationSpeed * Time.time, 0f) * new Vector3(distance + offsetX, 0f, 0f);
-        transform.rotation = Quaternion.LookRotation(parent.position - transform.position, Vector3.up);
+        transform.position = Parent.position + Quaternion.Euler(0f, RotationSpeed * Time.time, 0f) * new Vector3(Ddistance + OffsetX, 0f, 0f);
+        transform.rotation = Quaternion.LookRotation(Parent.position - transform.position, Vector3.up);
     }
 
 

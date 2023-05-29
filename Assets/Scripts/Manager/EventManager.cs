@@ -22,6 +22,8 @@ public static class EventManager
     public static UnityAction<CharacterCharacteristics> AddCharacterCharacteristics;
     public static UnityAction PurchaseIsCompleted;
     public static UnityAction<float> TakeDamageBoss;
+    public static UnityAction<Ability> UseAbality;
+    public static UnityAction CharacterAbilityLevelUp;
 
 
 }

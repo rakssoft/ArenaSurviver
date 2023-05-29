@@ -602,7 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 500
-  Speed: 4
+  Speed: 0
   BaseDamage: -20
   Activated: 1
   _isBoss: 1

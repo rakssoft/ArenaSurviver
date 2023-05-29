@@ -541,10 +541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03819028f79ef2458651f9148d508c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities:
-  - {fileID: 11400000, guid: ca8324d0f4aec0e44ae16aa67189b7b7, type: 2}
   _characterCharacteristics: {fileID: 11400000, guid: 27bf7a3a881069e41918a61be823d2a5, type: 2}
-  characterAbility: {fileID: 11400000, guid: 0df98fa9dfd5b2e4db217d193cf31fe2, type: 2}
+  _cooldownText: {fileID: 0}
+  AbilitiesList:
+  - {fileID: 11400000, guid: ca8324d0f4aec0e44ae16aa67189b7b7, type: 2}
 --- !u!95 &597221464054765125
 Animator:
   serializedVersion: 4

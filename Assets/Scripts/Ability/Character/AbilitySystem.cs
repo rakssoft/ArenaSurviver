@@ -1,43 +1,56 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class AbilitySystem : MonoBehaviour
 {
-    [SerializeField] private List<Ability> abilities;
+   
     [SerializeField] private CharacterCharacteristics _characterCharacteristics;
+    [SerializeField] private TextMeshProUGUI _cooldownText;
+
+    public List<Ability> AbilitiesList;
 
     private void Start()
     {
-        foreach (var ability in abilities)
+        foreach (var ability in AbilitiesList)
         {
-            ability.EnableAbility( _characterCharacteristics.GetBaseDamage());
-            EventManager.AddAbilityInUiFooterPanel?.Invoke(ability);
+            ability.EnableAbility(_characterCharacteristics.GetBaseDamage());
+         //   EventManager.AddAbilityInUiFooterPanel?.Invoke(ability);
         }
     }
 
     private void OnEnable()
     {
         EventManager.AddAbility += AddAbility;
+        EventManager.UseAbality += ActivateAbilityButton;
     }
 
     private void OnDisable()
     {
         EventManager.AddAbility -= AddAbility;
+        EventManager.UseAbality -= ActivateAbilityButton;
+    }
+
+    public void ActivateAbilityButton(Ability ability)
+    {
+
+        if (ability.state == Ability.AbilityState.Ready)
+        {
+            ability.state = Ability.AbilityState.Active;
+            ability.Activate(gameObject);
+            ability.activeTime = ability.Duration;
+        }
+
     }
 
     private void Update()
     {
-        foreach (var ability in abilities)
+        foreach (var ability in AbilitiesList)
         {
             switch (ability.state)
             {
-                case Ability.AbilityState.Ready:
-
-                        ability.state = Ability.AbilityState.Active;
-                        ability.Activate(gameObject);
-                        ability.activeTime = ability.Duration;
-                    
-                    break;
                 case Ability.AbilityState.Active:
                     if (ability.activeTime > 0)
                     {
@@ -63,12 +76,14 @@ public class AbilitySystem : MonoBehaviour
         }
     }
 
+
+
+
     public void AddAbility(Ability ability)
     {
-        if (!abilities.Contains(ability))
+        if (!AbilitiesList.Contains(ability))
         {
-            abilities.Add(ability);
-            EventManager.AddAbilityInUiFooterPanel?.Invoke(ability);
+            AbilitiesList.Add(ability);
             ability.EnableAbility( _characterCharacteristics.GetBaseDamage());
         }
     }

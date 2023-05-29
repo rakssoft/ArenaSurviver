@@ -34,6 +34,10 @@ public class ShockWaveAbility : Ability
         _currentLevel = 1;
         _currentDamage = Damage + _baseDamage;
     }
+    public override int GetCurrentStatsAbility()
+    {
+        return _currentLevel;
+    }
 }
 
 

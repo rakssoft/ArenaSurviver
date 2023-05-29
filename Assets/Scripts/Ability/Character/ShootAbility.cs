@@ -36,6 +36,10 @@ public class ShootAbility : Ability
         {
             Shoot(nearestEnemy, parent);
         }
+        else if (!nearestEnemy)
+        {
+            Shoot(parent, parent);
+        }
     }
 
     public override void LevelUp()
@@ -51,23 +55,43 @@ public class ShootAbility : Ability
         _currentLevel = 1;
         _currentPenetration = _basePenetration;
         _currentDamage = Damage + _baseDamage;
-      
+        cooldownTime = 0;
+    }
+    public override int GetCurrentStatsAbility()
+    {
+        return _currentLevel;
     }
 
 
     private void Shoot(GameObject enemy, GameObject parent)
     {
-        Quaternion parentRotation = parent.transform.rotation; // ��������� ������� �������
-        parent.transform.LookAt(enemy.transform.position); // ������������ ������������ ������ � ������� Enemy
-        parent.transform.eulerAngles = new Vector3(0, parent.transform.eulerAngles.y, 0); // ���������� ������� �� ��� x � z
+    //    Quaternion parentRotation = parent.transform.rotation;
+        // Сохраняем текущий поворот родительского объекта
+
+        parent.transform.LookAt(enemy.transform.position);
+        // Поворачиваем родительский объект в сторону позиции врага
+        // Это изменяет поворот родительского объекта так, чтобы он смотрел на позицию врага
+
+        parent.transform.eulerAngles = new Vector3(0, parent.transform.eulerAngles.y, 0);
+        // Задаем углы поворота родительского объекта, обнуляя наклон и сохраняя только поворот вокруг оси Y
 
         GameObject bull = Instantiate(_bulletPrefab, parent.transform.position, Quaternion.identity);
-        bull.transform.rotation = parent.transform.rotation; // ������������� ������� ��� ����
+        // Создаем экземпляр пули (или объекта-проектайла) в позиции родительского объекта
+        // Quaternion.identity означает, что мы не хотим поворачивать пулю
 
-        // ��������������� ����������� ������� ��� ������������� �������
-        parent.transform.rotation = parentRotation;
+        bull.transform.rotation = parent.transform.rotation;
+        // Устанавливаем поворот пули таким же, как и поворот родительского объекта
+
+      //  parent.transform.rotation = parentRotation;
+        // Восстанавливаем исходный поворот родительского объекта
 
         bull.GetComponent<Bullet>().StartBullet(_currentPenetration, _currentDamage, parent.transform.position, 50);
+        // Вызываем метод StartBullet() на компоненте Bullet (или любом другом компоненте, реализующем метод),
+        // передавая ему данные о проникновении, уроне, позиции родительского объекта и скорости пули
     }
+
+
+
+
 
 }

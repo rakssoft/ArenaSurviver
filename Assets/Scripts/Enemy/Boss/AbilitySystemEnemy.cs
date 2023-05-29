@@ -109,7 +109,7 @@ public class AbilitySystemEnemy : MonoBehaviour
 
     private int GetChooseAttack()
     {
-        int random = Random.RandomRange(0, _abilities.Length);
+        int random = Random.Range(0, _abilities.Length);
         return random;
     }
 

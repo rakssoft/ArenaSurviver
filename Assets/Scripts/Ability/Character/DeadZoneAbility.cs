@@ -10,6 +10,11 @@ public class DeadZoneAbility : Ability
     [SerializeField] private float _currenttimerActive;
 
     private float _currentDamage;
+
+    private void OnEnable()
+    {
+        _currentLevel = Level;
+    }
     public override void Activate(GameObject parentObject)
     {
         GameObject deadZone = Instantiate(_prefabGamezone, parentObject.transform.position, Quaternion.identity);
@@ -30,6 +35,11 @@ public class DeadZoneAbility : Ability
     {
         _currentLevel = 1;
         _currentDamage = Damage + _baseDamage;
+    }
+
+    public override int GetCurrentStatsAbility()
+    {
+        return _currentLevel;
     }
 }
 

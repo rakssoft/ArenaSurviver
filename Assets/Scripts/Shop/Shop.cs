@@ -62,7 +62,7 @@ public class Shop : MonoBehaviour
 
     private int RandomValueGear()
     {
-        int ValueValueGear = Random.RandomRange(0, _gears.Count);
+        int ValueValueGear = Random.Range(0, _gears.Count);
         return ValueValueGear;
     }
 

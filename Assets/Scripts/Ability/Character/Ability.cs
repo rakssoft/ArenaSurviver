@@ -17,6 +17,8 @@ public abstract class Ability : ScriptableObject
 
     public abstract void EnableAbility(float Damage);
 
+    public abstract int GetCurrentStatsAbility();
+
     public enum AbilityState
     {
         Ready,

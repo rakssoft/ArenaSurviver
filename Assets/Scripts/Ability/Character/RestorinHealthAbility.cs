@@ -36,6 +36,10 @@ public class RestorinHealthAbility : Ability
         _currentLevel = 1;
         _currentRestoringHealth = _baseRestoringHealth;
     }
+    public override int GetCurrentStatsAbility()
+    {
+        return _currentLevel;
+    }
 
 }
 public class RestoringHealthposition : MonoBehaviour
