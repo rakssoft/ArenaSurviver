@@ -8977,8 +8977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPrefabs:
-  - {fileID: 6743958453617387185, guid: 0a40d5dfcb4daf243a731aad1240d590, type: 3}
-  - {fileID: 6743958453617387185, guid: d6005290b242d7842964367fca4cd849, type: 3}
+  - {fileID: 3345127215598569061, guid: 999c809184a552348a8ef38273b547af, type: 3}
   _pointsSpawn:
   - {fileID: 1530130476}
   - {fileID: 1296931849}
@@ -9021,7 +9020,7 @@ MonoBehaviour:
   _parentEnemy: {fileID: 1388232359}
   _timerSpawn: 10
   _waveEnemy: 1
-  _isBossScene: 0
+  _isBossScene: 1
 --- !u!114 &2049415494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9077,16 +9076,6 @@ MonoBehaviour:
   _soundSource: {fileID: 1072237533}
   _winPanel: {fileID: 1702614527}
   _losePanel: {fileID: 3025378024483053093}
-  characterData:
-    speed: 0
-    baseAttack: 0
-    health: 0
-    playerName: 
-    gearList: []
-    isUnlocked: 0
-    Level: 0
-    Experience: 0
-    AbilitiesCharacterList: []
 --- !u!114 &2049415498
 MonoBehaviour:
   m_ObjectHideFlags: 0

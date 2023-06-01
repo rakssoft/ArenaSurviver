@@ -16,6 +16,7 @@ public class ShowCharacterMenuUI : MonoBehaviour
     [SerializeField] private GameObject _spawnPositionCharacter;
     [SerializeField] private CharacterDataManager _characterDataManager;
     [SerializeField] private float _upgradeCharacterPrice;
+    [SerializeField] private CharacterUI _characterUI;
     private CharacterCharacteristics _character;
     private GameObject characterObject;
     private int _characterChooseActive;
@@ -45,7 +46,9 @@ public class ShowCharacterMenuUI : MonoBehaviour
         {         
             PlayerPrefs.SetString("activeCharacterName", GetPlayerData().playerName);
         }
-       
+        ShowUI(GetActiveCharacter());
+        GetPlayerData();
+
     }
     public void ShowCharackers()
     {
@@ -136,6 +139,8 @@ public class ShowCharacterMenuUI : MonoBehaviour
         Vector3 direction = Camera.main.transform.position - _spawnPositionCharacter.transform.position;
         Quaternion rotation = Quaternion.LookRotation(direction);
         characterObject = Instantiate(_character.PrefabCharacter, _spawnPositionCharacter.transform.position, rotation);
+        _characterUI.ShowCharacterAbiliy(_character);
+
     }
 
     /// <summary>

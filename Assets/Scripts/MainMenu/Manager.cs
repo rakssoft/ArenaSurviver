@@ -10,7 +10,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private AudioSource _soundSource;
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _losePanel;
-    [SerializeField] private CharacterData characterData;
+
 
 
     private void OnEnable()

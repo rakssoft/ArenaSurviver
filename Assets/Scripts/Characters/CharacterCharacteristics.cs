@@ -19,7 +19,8 @@ public class CharacterCharacteristics : ScriptableObject
     public float Experience => _characterData.GetCurrentExperience();
     public float ExperienceNeededForLevel => _characterData.GetExperienceNeededForLevel(Level);
 
-    public List<Ability> CharacterAbilities => _characterData.AbilitiesCharacterList; 
+    public List<Ability> CharacterAbilities => _characterData.CurrentAbilitiesCharacterList; 
+    public List<Ability> AllCharacterAbilities => _characterData.AllAbilitiesCharacterList; 
 
 
     public void SetPlayerData(CharacterData characterData)
@@ -32,7 +33,7 @@ public class CharacterCharacteristics : ScriptableObject
         _characterData.isUnlocked = characterData.isUnlocked;
         _characterData.Level = characterData.Level;
         _characterData.Experience = characterData.Experience;
-        _characterData.AbilitiesCharacterList = characterData.AbilitiesCharacterList;
+        _characterData.CurrentAbilitiesCharacterList = characterData.CurrentAbilitiesCharacterList;
 
         Name = characterData.playerName;
     }

@@ -25,7 +25,7 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        Wallet.Instance.AddCoins(50);
+        Wallet.Instance.AddCoins(5000);
         ShowCurrentCoins();
        
     }

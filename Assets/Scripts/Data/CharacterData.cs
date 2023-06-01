@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 [System.Serializable]
 public class CharacterData
@@ -16,7 +17,7 @@ public class CharacterData
         this.isUnlocked = unlocked;
         this.Level = Level;
         this.Experience = Experience;
-        this.AbilitiesCharacterList = abilitiesList;
+        this.CurrentAbilitiesCharacterList = abilitiesList;
 
         if (useSavedData)
         {
@@ -35,7 +36,8 @@ public class CharacterData
     public int Level;
     public float Experience;
 
-   public List<Ability> AbilitiesCharacterList;
+   public List<Ability> CurrentAbilitiesCharacterList;
+   public List<Ability> AllAbilitiesCharacterList;
 
 
 
@@ -79,7 +81,7 @@ public class CharacterData
                 Level = savedData.Level;
                 Experience = savedData.Experience;
 
-                AbilitiesCharacterList = savedData.AbilitiesCharacterList;
+                CurrentAbilitiesCharacterList = savedData.CurrentAbilitiesCharacterList;
 
 
 
@@ -136,13 +138,21 @@ public class CharacterData
         int experienceNeeded = GetExperienceNeededForLevel(Level);
         if (Experience >= experienceNeeded)
         {
-            Level++;
-            IncreaseMaxHealth(10);
-            IncreaseBaseAttack(1);
+            Level++;      
+            IncreaseMaxHealth(5);
+            IncreaseBaseAttack(2);
             Experience -= experienceNeeded; // —охран€ем оставшийс€ опыт
             CheckLevelUp(); // –екурсивно провер€ем возможность повышени€ еще одного уровн€
         }
     }
+
+
+
+
+
+
+
+
 
     public int GetExperienceNeededForLevel(int level)
     {

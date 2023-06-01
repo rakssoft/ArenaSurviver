@@ -14,14 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterData:
     speed: 10
-    baseAttack: 12
-    health: 140
+    baseAttack: 24
+    health: 170
     playerName: Alisa
     gearList: []
-    isUnlocked: 1
-    Level: 6
-    Experience: 10
-    AbilitiesCharacterList: []
+    isUnlocked: 0
+    Level: 7
+    Experience: 40
+    CurrentAbilitiesCharacterList:
+    - {fileID: 11400000, guid: 2e189677063d056478bdea9fa750aefa, type: 2}
+    - {fileID: 11400000, guid: cef30b056b266864f9bda82800ea29cc, type: 2}
+    - {fileID: 11400000, guid: 6f9f7ebe836347048b97a1c686f07551, type: 2}
+    AllAbilitiesCharacterList:
+    - {fileID: 11400000, guid: cef30b056b266864f9bda82800ea29cc, type: 2}
+    - {fileID: 11400000, guid: 6f9f7ebe836347048b97a1c686f07551, type: 2}
+    - {fileID: 11400000, guid: d318fe7b53f80704296e837577f5340f, type: 2}
+    - {fileID: 11400000, guid: a357bf31189eb2748958a3683ffe30d4, type: 2}
   Name: Alisa
   PrefabCharacter: {fileID: 6390148200560269377, guid: 0bd40dbf3176bcb40a6e63bebf40094b, type: 3}
   Avatar: {fileID: 21300000, guid: 163d7aa01206c01408130824614c6a3f, type: 3}

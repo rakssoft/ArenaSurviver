@@ -12,7 +12,7 @@ public class ShopCharacters : MonoBehaviour
 
     private bool _unLocked;
 
-
+    сделать правильную работу магазина  открвание персонажей и их закрытие удаление.
     public void Start()
     {
         OpenShopCharacters();

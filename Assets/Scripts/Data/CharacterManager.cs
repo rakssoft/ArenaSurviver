@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
+    private CharacterCharacteristics _character;
     public List<CharacterCharacteristics> _characterCharacteristics;
 
     private void Start()
@@ -35,11 +37,17 @@ public class CharacterManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// јпгрейд персонажа получение опыта и подьем уровн€.
+    /// </summary>
+    /// <param name="Character"></param>
+    /// <param name="Experience"></param>
     public void Upgrade(CharacterCharacteristics Character, float Experience)
     {
         // ѕолучаем данные текущего игрока
+        _character = Character;
         CharacterData characterData = CharacterDataManager.Instance.GetPlayerData(Character.Name);
-
+        
         // »змен€ем значени€ характеристик
         /*        playerData.IncreaseMaxHealth(healthIncrease);
                 playerData.IncreaseBaseAttack(damageIncrease);
@@ -47,11 +55,60 @@ public class CharacterManager : MonoBehaviour
         characterData.AddExperience(Experience);
         // ќбновл€ем данные на игровом объекте
         Character.SetPlayerData(characterData);
-
+        UpdateAbilitiesOnLevelUp();
         // —охран€ем измененные данные
         characterData.Save();
         CharacterDataManager.Instance.Save();
     }
+
+
+    /// <summary>
+    /// ¬ соответсвии с уровн€ми открываетс€ его абилки  3. 7. 10  можно увеличить 
+    /// </summary>
+    private void UpdateAbilitiesOnLevelUp()
+    {
+        int level = _character.Level;
+        if (level == 3 && !_character.CharacterAbilities.Any(a => GetAbilityLevel(a) == 1))
+        {
+            AddAbilityByLevel(1);
+        }
+        if (level == 7 && !_character.CharacterAbilities.Any(a => GetAbilityLevel(a) == 2))
+        {
+            AddAbilityByLevel(2);
+        }
+        if (level == 10 && !_character.CharacterAbilities.Any(a => GetAbilityLevel(a) == 3))
+        {
+            AddAbilityByLevel(3);
+        }
+    }
+
+    /// <summary>
+    /// проверка на одинаковые способности и добавление их в список
+    /// </summary>
+    /// <param name="requiredLevel"></param>
+    private void AddAbilityByLevel(int requiredLevel)
+    {
+        Ability newAbility = _character.AllCharacterAbilities.FirstOrDefault(ability => GetAbilityLevel(ability) == requiredLevel);
+        if (newAbility != null && !_character.CharacterAbilities.Contains(newAbility))
+        {
+            _character.AddAbilities(newAbility);
+        }
+    }
+
+    /// <summary>
+    ///     «десь возвращайте уровень абилити, соответствующий вашей логике,
+    /// основыва€сь на уровне персонажа или других факторах
+    /// Ќапример, если уровень абилити равен индексу в списке AllCharacterAbilities, то можно вернуть индекс + 1
+    /// </summary>
+    /// <param name="ability"></param>
+    /// <returns></returns>
+    private int GetAbilityLevel(Ability ability)
+    {
+    
+        return _character.AllCharacterAbilities.IndexOf(ability) + 1;
+    }
+
+
 
 
 }
