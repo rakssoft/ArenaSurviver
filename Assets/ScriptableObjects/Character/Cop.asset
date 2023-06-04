@@ -14,18 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterData:
     speed: 10
-    baseAttack: 28
-    health: 145
+    baseAttack: 10
+    health: 100
     playerName: Cop
     gearList: []
-    isUnlocked: 0
-    Level: 10
+    isUnlocked: 1
+    Level: 1
     Experience: 0
     CurrentAbilitiesCharacterList:
-    - {fileID: 11400000, guid: a357bf31189eb2748958a3683ffe30d4, type: 2}
     - {fileID: 11400000, guid: 6f9f7ebe836347048b97a1c686f07551, type: 2}
-    - {fileID: 11400000, guid: ca8324d0f4aec0e44ae16aa67189b7b7, type: 2}
-    - {fileID: 11400000, guid: cef30b056b266864f9bda82800ea29cc, type: 2}
     AllAbilitiesCharacterList:
     - {fileID: 11400000, guid: 6f9f7ebe836347048b97a1c686f07551, type: 2}
     - {fileID: 11400000, guid: ca8324d0f4aec0e44ae16aa67189b7b7, type: 2}

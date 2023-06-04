@@ -14,17 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterData:
     speed: 10
-    baseAttack: 24
-    health: 170
+    baseAttack: 18
+    health: 120
     playerName: Alisa
     gearList: []
-    isUnlocked: 0
-    Level: 7
-    Experience: 40
+    isUnlocked: 1
+    Level: 5
+    Experience: 5
     CurrentAbilitiesCharacterList:
     - {fileID: 11400000, guid: 2e189677063d056478bdea9fa750aefa, type: 2}
     - {fileID: 11400000, guid: cef30b056b266864f9bda82800ea29cc, type: 2}
-    - {fileID: 11400000, guid: 6f9f7ebe836347048b97a1c686f07551, type: 2}
     AllAbilitiesCharacterList:
     - {fileID: 11400000, guid: cef30b056b266864f9bda82800ea29cc, type: 2}
     - {fileID: 11400000, guid: 6f9f7ebe836347048b97a1c686f07551, type: 2}

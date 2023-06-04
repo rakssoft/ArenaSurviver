@@ -14,18 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterData:
     speed: 10
-    baseAttack: 184
-    health: 595
+    baseAttack: 24
+    health: 135
     playerName: Bob
     gearList: []
     isUnlocked: 1
-    Level: 11
-    Experience: 25
+    Level: 8
+    Experience: 10
     CurrentAbilitiesCharacterList:
     - {fileID: 11400000, guid: ca8324d0f4aec0e44ae16aa67189b7b7, type: 2}
     - {fileID: 11400000, guid: cef30b056b266864f9bda82800ea29cc, type: 2}
     - {fileID: 11400000, guid: 2e189677063d056478bdea9fa750aefa, type: 2}
-    - {fileID: 11400000, guid: d318fe7b53f80704296e837577f5340f, type: 2}
     AllAbilitiesCharacterList:
     - {fileID: 11400000, guid: cef30b056b266864f9bda82800ea29cc, type: 2}
     - {fileID: 11400000, guid: 2e189677063d056478bdea9fa750aefa, type: 2}

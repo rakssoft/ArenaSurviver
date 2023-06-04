@@ -9,14 +9,16 @@ public class ShopCharacters : MonoBehaviour
     [SerializeField] private ShowCharacterMenuUI _showCharacter;
     [SerializeField] private Transform _shopTransform;
     [SerializeField] private CharacterShopUI _prefabCharacterShopUI;
-
+    private List<GameObject> _listCharacters = new List<GameObject>();
     private bool _unLocked;
 
-    сделать правильную работу магазина  открвание персонажей и их закрытие удаление.
-    public void Start()
+
+    private void Start()
     {
         OpenShopCharacters();
+        CloseShop();
     }
+
     public void OpenShopCharacters()
     {
         _listShopCharacters.Clear();
@@ -41,6 +43,7 @@ public class ShopCharacters : MonoBehaviour
         {
             CharacterShopUI characterShopUI = Instantiate(_prefabCharacterShopUI, _shopTransform.position, _shopTransform.rotation, _shopTransform);
             characterShopUI.ShowCharacter(_listShopCharacters[i]);
+            _listCharacters.Add(characterShopUI.gameObject);
         }
     }
 
@@ -55,6 +58,15 @@ public class ShopCharacters : MonoBehaviour
             _unLocked = false;
         }
         return _unLocked;
+    }
+
+    public void CloseShop()
+    {
+        foreach (var item in _listCharacters)
+        {
+            Destroy(item);
+        }
+        _listCharacters.Clear();
     }
 
 

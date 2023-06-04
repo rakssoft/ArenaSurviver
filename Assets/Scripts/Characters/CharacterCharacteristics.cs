@@ -43,6 +43,7 @@ public class CharacterCharacteristics : ScriptableObject
         if (characterData != null)
         {
             characterData.UnlockedCharacter(true);
+            SetPlayerData(characterData);
             CharacterDataManager.Instance.Save();
         }
     }

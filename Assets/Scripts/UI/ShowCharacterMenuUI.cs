@@ -46,9 +46,10 @@ public class ShowCharacterMenuUI : MonoBehaviour
         {         
             PlayerPrefs.SetString("activeCharacterName", GetPlayerData().playerName);
         }
+        
         ShowUI(GetActiveCharacter());
         GetPlayerData();
-
+       
     }
     public void ShowCharackers()
     {
@@ -91,14 +92,17 @@ public class ShowCharacterMenuUI : MonoBehaviour
         ShowUI(GetActiveCharacter());
     }
 
+    сделать активного персонажа  что то в нем проблема часто.  » разбить этот скрипт на немсколько
 
     public void AddCharactersInChoose(CharacterCharacteristics characterCharacteristics)
     {
         _characterCharacteristics.Add(characterCharacteristics);
     }
+
     private int GetActiveCharacter()
     {
-        return PlayerPrefs.GetInt("activeCharacter");
+        int getActive = PlayerPrefs.GetInt("activeCharacter") - 1;
+        return getActive;
     }
     public CharacterData GetPlayerData()
     {
